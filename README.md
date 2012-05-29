@@ -1,6 +1,8 @@
 RangeTree
 =========
 
+## A generic and asynchronous interval tree
+
 A generic implementation of a centered interval tree in C#. Also comes with an asynchronous version which rebuilds the tree using the Task Parallel Library (TPL).
 
 From [Wikipedia](http://en.wikipedia.org/wiki/Interval_tree):
