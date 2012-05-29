@@ -45,7 +45,7 @@ namespace RangeTreeExamples
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < 100; j++)
                     RandomTreeInsert(tree, 1000);
@@ -68,7 +68,7 @@ namespace RangeTreeExamples
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < 100; j++)
                     RandomTreeInsert(tree, 1000);

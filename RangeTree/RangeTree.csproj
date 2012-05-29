@@ -44,6 +44,7 @@
     <Compile Include="Range.cs" />
     <Compile Include="RangeTree.cs" />
     <Compile Include="RangeTreeAsync.cs" />
+    <Compile Include="RangeTreeNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

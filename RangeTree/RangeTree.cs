@@ -4,6 +4,11 @@ using System.Linq;
 
 namespace MB.Algodat
 {
+    /// <summary>
+    /// Range tree interface.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the range.</typeparam>
+    /// <typeparam name="T">The type of the data items.</typeparam>
     public interface IRangeTree<TKey, T>
         where TKey : IComparable<TKey>
         where T : IRangeProvider<TKey>
@@ -22,118 +27,14 @@ namespace MB.Algodat
         void Clear();
     }
 
-    public class RangeTreeNode<TKey, T>
-        where TKey : IComparable<TKey>
-        where T : IRangeProvider<TKey>
-    {
-        private TKey _center;
-        private RangeTreeNode<TKey, T> _leftNode;
-        private RangeTreeNode<TKey, T> _rightNode;
-        private List<T> _items;
-
-        private static IComparer<T> s_rangeComparer;
-
-        public RangeTreeNode(IComparer<T> _rangeComparer = null)
-        {
-            if (_rangeComparer != null)
-                s_rangeComparer = _rangeComparer;
-
-            _center = default(TKey);
-            _leftNode = null;
-            _rightNode = null;
-            _items = null;
-        }
-
-        public RangeTreeNode(IEnumerable<T> items, IComparer<T> _rangeComparer = null)
-        {
-            if (_rangeComparer != null)
-                s_rangeComparer = _rangeComparer;
-
-            var endPoints = new List<TKey>();
-            foreach (var o in items)
-            {
-                var range = o.Range;
-                endPoints.Add(range.From);
-                endPoints.Add(range.To);
-            }
-            endPoints.Sort();
-
-            _center = endPoints[endPoints.Count / 2];
-            _items = new List<T>();
-            
-            var left = new List<T>();
-            var right = new List<T>();
-
-            foreach (var o in items)
-            {
-                var range = o.Range;
-
-                if (range.To.CompareTo(_center) < 0)
-                    left.Add(o);
-                else if (range.From.CompareTo(_center) > 0)
-                    right.Add(o);
-                else
-                    _items.Add(o);
-            }
-
-            if (_items.Count > 0)
-                _items.Sort(s_rangeComparer);
-            else
-                _items = null;
-
-            if (left.Count > 0)
-                _leftNode = new RangeTreeNode<TKey, T>(left);
-            if (right.Count > 0)
-                _rightNode = new RangeTreeNode<TKey, T>(right);
-        }
-
-        public List<T> Query(TKey value)
-        {
-            var results = new List<T>();
-
-            if (_items != null)
-            {
-                foreach (var o in _items)
-                {
-                    if (o.Range.From.CompareTo(value) > 0)
-                        break;
-                    else if (o.Range.Contains(value))
-                        results.Add(o);
-                }
-            }
-
-            if (value.CompareTo(_center) < 0 && _leftNode != null)
-                results.AddRange(_leftNode.Query(value));
-            else if (value.CompareTo(_center) > 0 && _rightNode != null)
-                results.AddRange(_rightNode.Query(value));
-            
-            return results;
-        }
-
-        public List<T> Query(Range<TKey> range)
-        {
-            var results = new List<T>();
-
-            if (_items != null)
-            {
-                foreach (var o in _items)
-                {
-                    if (o.Range.From.CompareTo(range.To) > 0)
-                        break;
-                    else if (o.Range.Intersects(range))
-                        results.Add(o);
-                }
-            }
-
-            if (range.From.CompareTo(_center) < 0 && _leftNode != null)
-                results.AddRange(_leftNode.Query(range));
-            if (range.To.CompareTo(_center) > 0 && _rightNode != null)
-                results.AddRange(_rightNode.Query(range));
-            
-            return results;
-        }
-    }
-
+    /// <summary>
+    /// The standard range tree implementation. Keeps a root node and
+    /// forwards all queries to it.
+    /// Whenenver new items are added or items are removed, the tree 
+    /// goes "out of sync" and is rebuild when it's queried next.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the range.</typeparam>
+    /// <typeparam name="T">The type of the data items.</typeparam>
     public class RangeTree<TKey, T> : IRangeTree<TKey, T>
         where TKey : IComparable<TKey>
         where T : IRangeProvider<TKey>
@@ -144,27 +45,44 @@ namespace MB.Algodat
         private bool _autoRebuild;
         private IComparer<T> _rangeComparer;
 
+        /// <summary>
+        /// Whether the tree is currently in sync or not. If it is "out of sync"
+        /// you can either rebuild it manually (call Rebuild) or let it rebuild
+        /// automatically when you query it next.
+        /// </summary>
         public bool IsInSync
         {
             get { return _isInSync; }
         }
 
+        /// <summary>
+        /// All items of the tree.
+        /// </summary>
         public IEnumerable<T> Items
         {
             get { return _items; }
         }
 
+        /// <summary>
+        /// Count of all items.
+        /// </summary>
         public int Count
         {
             get { return _items.Count; }
         }
 
+        /// <summary>
+        /// Whether the tree should be rebuild automatically. Defaults to true.
+        /// </summary>
         public bool AutoRebuild
         {
             get { return _autoRebuild; }
             set { _autoRebuild = value; }
         }
 
+        /// <summary>
+        /// Initializes an empty tree.
+        /// </summary>
         public RangeTree(IComparer<T> rangeComparer)
         {
             _rangeComparer = rangeComparer;
@@ -175,6 +93,9 @@ namespace MB.Algodat
             
         }
 
+        /// <summary>
+        /// Initializes a tree with a list of items to be added.
+        /// </summary>
         public RangeTree(IEnumerable<T> items, IComparer<T> rangeComparer)
         {
             _rangeComparer = rangeComparer;
@@ -184,6 +105,10 @@ namespace MB.Algodat
             _autoRebuild = true;
         }
 
+        /// <summary>
+        /// Performans a "stab" query with a single value.
+        /// All items with overlapping ranges are returned.
+        /// </summary>
         public List<T> Query(TKey value)
         {
             if (!_isInSync && _autoRebuild)
@@ -192,6 +117,10 @@ namespace MB.Algodat
             return _root.Query(value);
         }
 
+        /// <summary>
+        /// Performans a range query.
+        /// All items with overlapping ranges are returned.
+        /// </summary>
         public List<T> Query(Range<TKey> range)
         {
             if (!_isInSync && _autoRebuild)
@@ -200,6 +129,9 @@ namespace MB.Algodat
             return _root.Query(range);
         }
 
+        /// <summary>
+        /// Rebuilds the tree if it is out of sync.
+        /// </summary>
         public void Rebuild()
         {
             if (_isInSync)
@@ -209,24 +141,36 @@ namespace MB.Algodat
             _isInSync = true;
         }
 
+        /// <summary>
+        /// Adds the specified item. Tree will go out of sync.
+        /// </summary>
         public void Add(T item)
         {
             _isInSync = false;
             _items.Add(item);
         }
 
+        /// <summary>
+        /// Adds the specified items. Tree will go out of sync.
+        /// </summary>
         public void Add(IEnumerable<T> items)
         {
             _isInSync = false;
             _items.AddRange(items);
         }
 
+        /// <summary>
+        /// Removes the specified item. Tree will go out of sync.
+        /// </summary>
         public void Remove(T item)
         {
             _isInSync = false;
             _items.Remove(item);
         }
 
+        /// <summary>
+        /// Removes the specified items. Tree will go out of sync.
+        /// </summary>
         public void Remove(IEnumerable<T> items)
         {
             _isInSync = false;
@@ -235,6 +179,9 @@ namespace MB.Algodat
                 _items.Remove(item);
         }
 
+        /// <summary>
+        /// Clears the tree (removes all items).
+        /// </summary>
         public void Clear()
         {
             _root = new RangeTreeNode<TKey, T>(_rangeComparer);            
