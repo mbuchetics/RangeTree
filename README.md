@@ -8,7 +8,7 @@ A generic implementation of a centered interval tree in C#. Also comes with an a
 From [Wikipedia](http://en.wikipedia.org/wiki/Interval_tree):
 > In computer science, an interval tree is an ordered tree data structure to hold intervals. Specifically, it allows one to efficiently find all intervals that overlap with any given interval or point. It is often used for windowing queries, for instance, to find all roads on a computerized map inside a rectangular viewport, or to find all visible elements inside a three-dimensional scene.
 
-Based on the Java implementation found here: http://www.thekevindolan.com/2010/02/interval-tree/index.html
+Based on the Java implementation found here: http://www.sanfoundry.com/java-program-implement-interval-tree/
 
 Queries require O(log n + m) time, with n being the total number of intervals and m being the number of reported results. Construction requires O(n log n) time, and storage requires O(n) space.
 
