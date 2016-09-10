@@ -10,8 +10,9 @@ namespace MB.Algodat
     public struct Range<T> : IComparable<Range<T>>
         where T : IComparable<T>
     {
-        public T From;
-        public T To;
+        public T From { get; }
+
+        public T To { get; }
 
         /// <summary>
         /// Initializes a new <see cref="Range&lt;T&gt;"/> instance.
@@ -29,6 +30,11 @@ namespace MB.Algodat
         public Range(T from, T to)
             : this()
         {
+            if (from.CompareTo(to) == 1)
+            {
+                throw new ArgumentOutOfRangeException($"{nameof(from)} cannot be larger than {nameof(to)}");
+            }
+
             From = from;
             To = to;
         }
