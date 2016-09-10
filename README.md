@@ -1,6 +1,8 @@
 RangeTree
 =========
 
+[![Build status](https://ci.appveyor.com/api/projects/status/4safc7e687bl3j09?svg=true)](https://ci.appveyor.com/project/apacha/rangetree)
+
 ## A generic and asynchronous interval tree
 
 A generic implementation of a centered interval tree in C#. Also comes with an asynchronous version which rebuilds the tree using the Task Parallel Library (TPL).
