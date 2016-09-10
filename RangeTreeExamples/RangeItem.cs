@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MB.Algodat;
@@ -78,20 +77,5 @@ namespace RangeTreeExamples
         {
             return !Equals(left, right);
         }
-    }
-
-    /// <summary>
-    /// Compares two range items by comparing their ranges.
-    /// </summary>
-    public class RangeItemComparer : IComparer<RangeItem>
-    {
-        #region IComparer<RangeItem> Members
-
-        public int Compare(RangeItem x, RangeItem y)
-        {
-            return x.Range.CompareTo(y.Range);
-        }
-
-        #endregion
     }
 }

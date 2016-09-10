@@ -51,6 +51,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="InvalidRangeItemTests.cs" />
+    <Compile Include="NonStaticComparerTests.cs" />
+    <Compile Include="MultipleComparerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadmeExampleTests.cs" />
   </ItemGroup>

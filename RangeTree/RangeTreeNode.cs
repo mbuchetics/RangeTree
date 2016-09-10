@@ -17,7 +17,7 @@ namespace MB.Algodat
         private RangeTreeNode<TKey, T> _rightNode;
         private List<T> _items;
 
-        private static IComparer<T> s_rangeComparer;
+        private readonly IComparer<T> _rangeComparer;
 
         /// <summary>
         /// Initializes an empty node.
@@ -26,7 +26,7 @@ namespace MB.Algodat
         public RangeTreeNode(IComparer<T> rangeComparer = null)
         {
             if (rangeComparer != null)
-                s_rangeComparer = rangeComparer;
+                _rangeComparer = rangeComparer;
 
             _center = default(TKey);
             _leftNode = null;
@@ -41,7 +41,7 @@ namespace MB.Algodat
         public RangeTreeNode(IEnumerable<T> items, IComparer<T> rangeComparer = null)
         {
             if (rangeComparer != null)
-                s_rangeComparer = rangeComparer;
+                _rangeComparer = rangeComparer;
 
             // first, find the median
             var endPoints = new List<TKey>();
@@ -78,15 +78,15 @@ namespace MB.Algodat
 
             // sort the items, this way the query is faster later on
             if (_items.Count > 0)
-                _items.Sort(s_rangeComparer);
+                _items.Sort(_rangeComparer);
             else
                 _items = null;
 
             // create left and right nodes, if there are any items
             if (left.Count > 0)
-                _leftNode = new RangeTreeNode<TKey, T>(left);
+                _leftNode = new RangeTreeNode<TKey, T>(left, _rangeComparer);
             if (right.Count > 0)
-                _rightNode = new RangeTreeNode<TKey, T>(right);
+                _rightNode = new RangeTreeNode<TKey, T>(right, _rangeComparer);
         }
 
         /// <summary>
