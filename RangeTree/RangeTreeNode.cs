@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MB.Algodat
 {
@@ -8,25 +9,22 @@ namespace MB.Algodat
     /// its subtree. Also contains methods to query the subtree.
     /// Basically, all interval tree logic is here.
     /// </summary>
-    public class RangeTreeNode<TKey, T>
-        where TKey : IComparable<TKey>
-        where T : IRangeProvider<TKey>
+    internal class RangeTreeNode<TKey, TValue> : IComparer<RangeValuePair<TKey, TValue>>
     {
         private TKey _center;
-        private RangeTreeNode<TKey, T> _leftNode;
-        private RangeTreeNode<TKey, T> _rightNode;
-        private List<T> _items;
+        private RangeTreeNode<TKey, TValue> _leftNode;
+        private RangeTreeNode<TKey, TValue> _rightNode;
+        private RangeValuePair<TKey, TValue>[] _items;
 
-        private readonly IComparer<T> _rangeComparer;
+        private readonly IComparer<TKey> _comparer;
 
         /// <summary>
         /// Initializes an empty node.
         /// </summary>
-        /// <param name="rangeComparer">The comparer used to compare two items.</param>
-        public RangeTreeNode(IComparer<T> rangeComparer = null)
+        /// <param name="comparer">The comparer used to compare two items.</param>
+        public RangeTreeNode(IComparer<TKey> comparer)
         {
-            if (rangeComparer != null)
-                _rangeComparer = rangeComparer;
+            _comparer = comparer ?? Comparer<TKey>.Default;
 
             _center = default(TKey);
             _leftNode = null;
@@ -37,28 +35,26 @@ namespace MB.Algodat
         /// <summary>
         /// Initializes a node with a list of items, builds the sub tree.
         /// </summary>
-        /// <param name="rangeComparer">The comparer used to compare two items.</param>
-        public RangeTreeNode(IEnumerable<T> items, IComparer<T> rangeComparer = null)
+        /// <param name="comparer">The comparer used to compare two items.</param>
+        public RangeTreeNode(IList<RangeValuePair<TKey, TValue>> items, IComparer<TKey> comparer)
         {
-            if (rangeComparer != null)
-                _rangeComparer = rangeComparer;
+            _comparer = comparer ?? Comparer<TKey>.Default;
 
             // first, find the median
-            var endPoints = new List<TKey>();
-            foreach (var o in items)
+            var endPoints = new List<TKey>(items.Count * 2);
+            foreach (var item in items)
             {
-                var range = o.Range;
-                endPoints.Add(range.From);
-                endPoints.Add(range.To);
+                endPoints.Add(item.From);
+                endPoints.Add(item.To);
             }
-            endPoints.Sort();
+            endPoints.Sort(_comparer);
 
             // the median is used as center value
             _center = endPoints[endPoints.Count / 2];
-            _items = new List<T>();
-            
-            var left = new List<T>();
-            var right = new List<T>();
+
+            var inner = new List<RangeValuePair<TKey, TValue>>();
+            var left = new List<RangeValuePair<TKey, TValue>>();
+            var right = new List<RangeValuePair<TKey, TValue>>();
 
             // iterate over all items
             // if the range of an item is completely left of the center, add it to the left items
@@ -66,56 +62,65 @@ namespace MB.Algodat
             // otherwise (range overlaps the center), add the item to this node's items
             foreach (var o in items)
             {
-                var range = o.Range;
-
-                if (range.To.CompareTo(_center) < 0)
+                if (_comparer.Compare(o.To, _center) < 0)
                     left.Add(o);
-                else if (range.From.CompareTo(_center) > 0)
+                else if (_comparer.Compare(o.From, _center) > 0)
                     right.Add(o);
                 else
-                    _items.Add(o);
+                    inner.Add(o);
             }
 
             // sort the items, this way the query is faster later on
-            if (_items.Count > 0)
-                _items.Sort(_rangeComparer);
+            if (inner.Count > 0)
+            {
+                if (inner.Count > 1)
+                    inner.Sort(this);
+                _items = inner.ToArray();
+            }
             else
+            {
                 _items = null;
+            }
 
             // create left and right nodes, if there are any items
             if (left.Count > 0)
-                _leftNode = new RangeTreeNode<TKey, T>(left, _rangeComparer);
+                _leftNode = new RangeTreeNode<TKey, TValue>(left, _comparer);
             if (right.Count > 0)
-                _rightNode = new RangeTreeNode<TKey, T>(right, _rangeComparer);
+                _rightNode = new RangeTreeNode<TKey, TValue>(right, _comparer);
         }
+
+
 
         /// <summary>
         /// Performans a "stab" query with a single value.
         /// All items with overlapping ranges are returned.
         /// </summary>
-        public List<T> Query(TKey value)
+        public IEnumerable<TValue> Query(TKey value)
         {
-            var results = new List<T>();
+            var results = new List<TValue>();
 
-            // If the node has items, check their ranges.
+            // If the node has items, check for leaves containing the value.
             if (_items != null)
             {
                 foreach (var o in _items)
                 {
-                    if (o.Range.From.CompareTo(value) > 0)
+                    if (_comparer.Compare(o.From, value) > 0)
                         break;
-                    else if (o.Range.Contains(value))
-                        results.Add(o);
+                    else if (_comparer.Compare(value, o.From) >= 0 && _comparer.Compare(value, o.To) <= 0)
+                    {
+                        results.Add(o.Value);
+                    }
                 }
             }
 
             // go to the left or go to the right of the tree, depending
             // where the query value lies compared to the center
-            if (value.CompareTo(_center) < 0 && _leftNode != null)
+            var centerComp = _comparer.Compare(value, _center);
+            if (_leftNode != null && centerComp < 0)
                 results.AddRange(_leftNode.Query(value));
-            else if (value.CompareTo(_center) > 0 && _rightNode != null)
+            else if (_rightNode != null && centerComp > 0)
                 results.AddRange(_rightNode.Query(value));
-            
+
             return results;
         }
 
@@ -123,30 +128,71 @@ namespace MB.Algodat
         /// Performans a range query.
         /// All items with overlapping ranges are returned.
         /// </summary>
-        public List<T> Query(Range<TKey> range)
+        public IEnumerable<TValue> Query(TKey from, TKey to)
         {
-            var results = new List<T>();
+            var results = new List<TValue>();
 
-            // If the node has items, check their ranges.
+            // If the node has items, check for leaves intersecting the range.
             if (_items != null)
             {
                 foreach (var o in _items)
                 {
-                    if (o.Range.From.CompareTo(range.To) > 0)
+                    if (_comparer.Compare(o.From, to) > 0)
                         break;
-                    else if (o.Range.Intersects(range))
-                        results.Add(o);
+                    else if (_comparer.Compare(to, o.From) >= 0 && _comparer.Compare(from, o.To) <= 0)
+                        results.Add(o.Value);
                 }
             }
 
             // go to the left or go to the right of the tree, depending
             // where the query value lies compared to the center
-            if (range.From.CompareTo(_center) < 0 && _leftNode != null)
-                results.AddRange(_leftNode.Query(range));
-            if (range.To.CompareTo(_center) > 0 && _rightNode != null)
-                results.AddRange(_rightNode.Query(range));
-            
+            if (_leftNode != null && _comparer.Compare(from, _center) < 0)
+                results.AddRange(_leftNode.Query(from, to));
+            if (_rightNode != null && _comparer.Compare(to, _center) > 0)
+                results.AddRange(_rightNode.Query(from, to));
+
             return results;
+        }
+
+        /// <summary>
+        /// Returns less than 0 if this range's From is less than the other, greater than 0 if greater.
+        /// If both are equal, the comparison of the To values is returned.
+        /// 0 if both ranges are equal.
+        /// </summary>
+        /// <param name="y">The other.</param>
+        /// <returns></returns>
+        int IComparer<RangeValuePair<TKey, TValue>>.Compare(RangeValuePair<TKey, TValue> x, RangeValuePair<TKey, TValue> y)
+        {
+            var fromComp = _comparer.Compare(x.From, y.From);
+            if (fromComp == 0)
+                return _comparer.Compare(x.To, y.To);
+            return fromComp;
+        }
+
+        public TKey Max
+        {
+            get
+            {
+                if (_rightNode != null)
+                    return _rightNode.Max;
+                else if (_items != null)
+                    return _items.Max(i => i.To);
+                else
+                    return default(TKey);
+            }
+        }
+
+        public TKey Min
+        {
+            get
+            {
+                if (_leftNode != null)
+                    return _leftNode.Max;
+                else if (_items != null)
+                    return _items.Max(i => i.From);
+                else
+                    return default(TKey);
+            }
         }
     }
 }

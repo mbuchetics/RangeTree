@@ -50,11 +50,12 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="InvalidRangeItemTests.cs" />
-    <Compile Include="NonStaticComparerTests.cs" />
     <Compile Include="MultipleComparerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadmeExampleTests.cs" />
+    <Compile Include="TreeOfDateTimeTests.cs" />
+    <Compile Include="TreeOfIntTests.cs" />
+    <Compile Include="TreeSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

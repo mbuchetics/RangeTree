@@ -12,6 +12,7 @@
     <AssemblyName>RangeTree</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,10 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRangeTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Range.cs" />
+    <Compile Include="RangeValuePair.cs" />
     <Compile Include="RangeTree.cs" />
-    <Compile Include="RangeTreeAsync.cs" />
     <Compile Include="RangeTreeNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
