@@ -28,10 +28,10 @@ namespace RangeTreeExamples
                 { 25, 35, "4" },
             };
 
-            PrintQueryResult("query 1", tree.Query(5));
-            PrintQueryResult("query 2", tree.Query(10));
-            PrintQueryResult("query 3", tree.Query(29));
-            PrintQueryResult("query 4", tree.Query(5, 15));
+            PrintQueryResult("query 1", tree[5]);
+            PrintQueryResult("query 2", tree[10]);
+            PrintQueryResult("query 3", tree[29]);
+            PrintQueryResult("query 4", tree[5, 15]);
 
             Console.WriteLine();
         }
@@ -49,7 +49,7 @@ namespace RangeTreeExamples
                 for (int j = 0; j < 100; j++)
                     RandomTreeInsert(tree, 1000);
 
-                var resultCount = tree.Query(50, 60).Count();
+                var resultCount = tree[50, 60].Count();
                 Console.WriteLine("query: {0} results (tree count: {1})", resultCount, tree.Count);
             }
 
@@ -67,7 +67,7 @@ namespace RangeTreeExamples
             tree.Add(Math.Min(a, b), Math.Max(a, b), "value");
         }
 
-        static void PrintQueryResult(string queryTitle, IEnumerable<string> result)
+        static void PrintQueryResult(string queryTitle, IEnumerable<RangeValuePair<int, string>> result)
         {
             Console.WriteLine(queryTitle);
             foreach (var item in result)

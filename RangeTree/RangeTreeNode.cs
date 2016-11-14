@@ -95,9 +95,9 @@ namespace MB.Algodat
         /// Performans a "stab" query with a single value.
         /// All items with overlapping ranges are returned.
         /// </summary>
-        public IEnumerable<TValue> Query(TKey value)
+        public IEnumerable<RangeValuePair<TKey, TValue>> Query(TKey value)
         {
-            var results = new List<TValue>();
+            var results = new List<RangeValuePair<TKey, TValue>>();
 
             // If the node has items, check for leaves containing the value.
             if (_items != null)
@@ -108,7 +108,7 @@ namespace MB.Algodat
                         break;
                     else if (_comparer.Compare(value, o.From) >= 0 && _comparer.Compare(value, o.To) <= 0)
                     {
-                        results.Add(o.Value);
+                        results.Add(o);
                     }
                 }
             }
@@ -128,9 +128,9 @@ namespace MB.Algodat
         /// Performans a range query.
         /// All items with overlapping ranges are returned.
         /// </summary>
-        public IEnumerable<TValue> Query(TKey from, TKey to)
+        public IEnumerable<RangeValuePair<TKey, TValue>> Query(TKey from, TKey to)
         {
-            var results = new List<TValue>();
+            var results = new List<RangeValuePair<TKey, TValue>>();
 
             // If the node has items, check for leaves intersecting the range.
             if (_items != null)
@@ -140,7 +140,7 @@ namespace MB.Algodat
                     if (_comparer.Compare(o.From, to) > 0)
                         break;
                     else if (_comparer.Compare(to, o.From) >= 0 && _comparer.Compare(from, o.To) <= 0)
-                        results.Add(o.Value);
+                        results.Add(o);
                 }
             }
 

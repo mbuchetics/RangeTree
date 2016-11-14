@@ -22,38 +22,71 @@ namespace MB.Algodat
         private IComparer<TKey> _comparer;
 
         /// <summary>
-        /// Whether the tree is currently in sync or not. If it is "out of sync"
-        /// you can either rebuild it manually (call Rebuild) or let it rebuild
-        /// automatically when you query it next.
-        /// </summary>
-        public bool IsInSync
-        {
-            get { return _isInSync; }
-        }
-
-        /// <summary>
-        /// All items of the tree.
-        /// </summary>
-        public IEnumerable<TValue> Values
-        {
-            get { return _items.Select(i => i.Value); }
-        }
-
-        /// <summary>
-        /// Count of all items.
-        /// </summary>
-        public int Count
-        {
-            get { return _items.Count; }
-        }
-
-        /// <summary>
         /// Whether the tree should be rebuild automatically. Defaults to true.
         /// </summary>
         public bool AutoRebuild
         {
             get { return _autoRebuild; }
             set { _autoRebuild = value; }
+        }
+
+        /// <summary>
+        /// Count of all items.
+        /// </summary>
+        public int Count { get { return _items.Count; } }
+
+        /// <summary>
+        /// Whether the tree is currently in sync or not. If it is "out of sync"
+        /// you can either rebuild it manually (call Rebuild) or let it rebuild
+        /// automatically when you query it next.
+        /// </summary>
+        public bool IsInSync { get { return _isInSync; } }
+
+        public bool IsReadOnly { get { return false; } }
+
+        /// <summary>
+        /// Maximum key found in the tree
+        /// </summary>
+        public TKey Max { get { return _root.Max; } }
+
+        /// <summary>
+        /// Minimum key found in the tree
+        /// </summary>
+        public TKey Min { get { return _root.Min; } }
+
+        /// <summary>
+        /// All items of the tree.
+        /// </summary>
+        public IEnumerable<TValue> Values { get { return _items.Select(i => i.Value); } }
+
+        /// <summary>
+        /// Performans a range query.
+        /// All items with overlapping ranges are returned.
+        /// </summary>
+        public IEnumerable<RangeValuePair<TKey, TValue>> this[TKey from, TKey to]
+        {
+            get
+            {
+                if (!_isInSync && _autoRebuild)
+                    Rebuild();
+
+                return _root.Query(from, to);
+            }
+        }
+
+        /// <summary>
+        /// Performans a "stab" query with a single value.
+        /// All items with overlapping ranges are returned.
+        /// </summary>
+        public IEnumerable<RangeValuePair<TKey, TValue>> this[TKey value]
+        {
+            get
+            {
+                if (!_isInSync && _autoRebuild)
+                    Rebuild();
+
+                return _root.Query(value);
+            }
         }
 
         /// <summary>
@@ -72,27 +105,51 @@ namespace MB.Algodat
         }
 
         /// <summary>
-        /// Performans a "stab" query with a single value.
-        /// All items with overlapping ranges are returned.
+        /// Adds the specified item. Tree will go out of sync.
         /// </summary>
-        public IEnumerable<TValue> Query(TKey value)
+        public void Add(TKey from, TKey to, TValue value)
         {
-            if (!_isInSync && _autoRebuild)
-                Rebuild();
+            if (_comparer.Compare(from, to) == 1)
+                throw new ArgumentOutOfRangeException($"{nameof(from)} cannot be larger than {nameof(to)}");
 
-            return _root.Query(value);
+            _isInSync = false;
+            _items.Add(new RangeValuePair<TKey, TValue>(from, to, value));
         }
 
         /// <summary>
-        /// Performans a range query.
-        /// All items with overlapping ranges are returned.
+        /// Adds the specified item. Tree will go out of sync.
         /// </summary>
-        public IEnumerable<TValue> Query(TKey from, TKey to)
+        public void Add(RangeValuePair<TKey, TValue> item)
+        {
+            Add(item.From, item.To, item.Value);
+        }
+
+        /// <summary>
+        /// Clears the tree (removes all items).
+        /// </summary>
+        public void Clear()
+        {
+            _root = new RangeTreeNode<TKey, TValue>(_comparer);
+            _items = new List<RangeValuePair<TKey, TValue>>();
+            _isInSync = true;
+        }
+
+        public bool Contains(RangeValuePair<TKey, TValue> item)
+        {
+            return _items.Contains(item);
+        }
+
+        public void CopyTo(RangeValuePair<TKey, TValue>[] array, int arrayIndex)
+        {
+            _items.CopyTo(array, arrayIndex);
+        }
+
+        public IEnumerator<RangeValuePair<TKey, TValue>> GetEnumerator()
         {
             if (!_isInSync && _autoRebuild)
                 Rebuild();
 
-            return _root.Query(from, to);
+            return _items.GetEnumerator();
         }
 
         /// <summary>
@@ -112,73 +169,18 @@ namespace MB.Algodat
         }
 
         /// <summary>
-        /// Adds the specified item. Tree will go out of sync.
-        /// </summary>
-        public void Add(TKey from, TKey to, TValue value)
-        {
-            if (_comparer.Compare(from, to) == 1)
-                throw new ArgumentOutOfRangeException($"{nameof(from)} cannot be larger than {nameof(to)}");
-
-            _isInSync = false;
-            _items.Add(new RangeValuePair<TKey, TValue>(from, to, value));
-        }
-
-        /// <summary>
         /// Removes the specified item. Tree will go out of sync.
         /// </summary>
-        public void Remove(TValue value)
+        public bool Remove(RangeValuePair<TKey, TValue> item)
         {
-            _isInSync = false;
-            _items = _items.Where(l => !l.Value.Equals(value)).ToList();
-        }
-
-        /// <summary>
-        /// Removes the specified items. Tree will go out of sync.
-        /// </summary>
-        public void Remove(IEnumerable<TValue> items)
-        {
-            _isInSync = false;
-            _items = _items.Where(l => !items.Contains(l.Value)).ToList();
-        }
-
-        /// <summary>
-        /// Clears the tree (removes all items).
-        /// </summary>
-        public void Clear()
-        {
-            _root = new RangeTreeNode<TKey, TValue>(_comparer);
-            _items = new List<RangeValuePair<TKey, TValue>>();
-            _isInSync = true;
-        }
-
-        public IEnumerator<RangeValuePair<TKey, TValue>> GetEnumerator()
-        {
-            if (!_isInSync && _autoRebuild)
-                Rebuild();
-
-            return _items.GetEnumerator();
+            var removed = _items.Remove(item);
+            _isInSync = _isInSync && !removed;
+            return removed;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-        }
-
-
-        public TKey Max
-        {
-            get
-            {
-                return _root.Max;
-            }
-        }
-
-        public TKey Min
-        {
-            get
-            {
-                return _root.Min;
-            }
         }
     }
 }

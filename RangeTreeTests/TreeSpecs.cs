@@ -52,8 +52,7 @@ namespace RangeTreeTests
         public int CorrectQuery_BuiltInOrder(Tuple<int, int> value)
         {
             var tree = CreateTree(TestEntries().OrderBy(interval => interval.Item1));
-            return tree
-                .Query(value.Item1, value.Item2)
+            return tree[value.Item1, value.Item2]
                 .Count();
         }
 
@@ -61,8 +60,7 @@ namespace RangeTreeTests
         public int CorrectQuery_BuiltInReverseOrder(Tuple<int, int> value)
         {
             var tree = CreateTree(TestEntries().OrderBy(interval => interval.Item1).Reverse());
-            return tree
-                .Query(value.Item1, value.Item2)
+            return tree[value.Item1, value.Item2]
                 .Count();
         }
 
@@ -70,8 +68,7 @@ namespace RangeTreeTests
         public int CorrectQuery_BuiltRandomly(Tuple<int, int> value)
         {
             var tree = CreateTree(TestEntries());
-            return tree
-                .Query(value.Item1, value.Item2)
+            return tree[value.Item1, value.Item2]
                 .Count();
         }
 

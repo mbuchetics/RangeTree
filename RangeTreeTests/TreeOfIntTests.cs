@@ -33,9 +33,9 @@ namespace RangeTreeTests
             tree.Add(0, 10, 100);
             tree.Add(20, 30, 200);
 
-            var result = tree.Query(5).ToList();
+            var result = tree[5].ToList();
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(100, result[0]);
+            Assert.AreEqual(100, result[0].Value);
         }
 
         [Test]
@@ -45,10 +45,10 @@ namespace RangeTreeTests
             tree.Add(0, 10, 100);
             tree.Add(3, 30, 200);
 
-            var result = tree.Query(5).ToList();
+            var result = tree[5].ToList();
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(100, result[0]);
-            Assert.AreEqual(200, result[1]);
+            Assert.AreEqual(100, result[0].Value);
+            Assert.AreEqual(200, result[1].Value);
         }
     }
 }

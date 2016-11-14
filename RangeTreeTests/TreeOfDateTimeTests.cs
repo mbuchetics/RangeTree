@@ -35,9 +35,9 @@ namespace RangeTreeTests
             tree.Add(ZERO, ZERO.AddHours(10), 100);
             tree.Add(ZERO.AddHours(20), ZERO.AddHours(30), 200);
 
-            var result = tree.Query(ZERO.AddHours(5)).ToList();
+            var result = tree[ZERO.AddHours(5)].ToList();
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(100, result[0]);
+            Assert.AreEqual(100, result[0].Value);
         }
 
 
@@ -55,7 +55,7 @@ namespace RangeTreeTests
             tree.Add(ZERO.AddHours(10), ZERO.AddHours(15), 200);
             tree.Add(ZERO.AddHours(10), ZERO.AddHours(20), 200);
 
-            var result = tree.Query(ZERO.AddHours(10)).ToList();
+            var result = tree[ZERO.AddHours(10)].ToList();
             Assert.AreEqual(3, result.Count);
         }
 
@@ -66,7 +66,7 @@ namespace RangeTreeTests
             var tree = new RangeTree<DateTime, int>();
             tree.Add(ZERO, ZERO.AddHours(1), 100);
 
-            var result = tree.Query(ZERO).ToList();
+            var result = tree[ZERO].ToList();
             Assert.AreEqual(1, result.Count);
         }
 
@@ -76,7 +76,7 @@ namespace RangeTreeTests
             var tree = new RangeTree<DateTime, int>();
             tree.Add(ZERO, ZERO.AddHours(1), 100);
 
-            var result = tree.Query(ZERO.AddHours(1)).ToList();
+            var result = tree[ZERO.AddHours(1)].ToList();
             Assert.AreEqual(1, result.Count);
         }
 
@@ -89,10 +89,10 @@ namespace RangeTreeTests
             tree.Add(ZERO, ZERO.AddHours(10), 100);
             tree.Add(ZERO.AddHours(3), ZERO.AddHours(30), 200);
 
-            var result = tree.Query(ZERO.AddHours(5)).ToList();
+            var result = tree[ZERO.AddHours(5)].ToList();
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(100, result[0]);
-            Assert.AreEqual(200, result[1]);
+            Assert.AreEqual(100, result[0].Value);
+            Assert.AreEqual(200, result[1].Value);
         }
     }
 }
