@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MB.Algodat
+namespace RangeTree
 {
     /// <summary>
     /// The async range tree implementation. Keeps a root node and

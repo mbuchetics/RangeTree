@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using MB.Algodat;
-
-namespace RangeTreeExamples
+﻿namespace RangeTree.Examples
 {
     /// <summary>
     /// A simple example cass, which contains an integer range

@@ -3,14 +3,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using RangeTree;
+    using RangeTree.Examples;
+    using Xunit;
 
-    using MB.Algodat;
-
-    using NUnit.Framework;
-
-    using RangeTreeExamples;
-
-    [TestFixture]
     public class NonStaticComparerTests
     {
         private RangeTree<int, RangeItem> _tree;
@@ -19,8 +15,7 @@
 
         private IEnumerable<RangeItem> _items;
 
-        [SetUp]
-        public void SetUp()
+        public NonStaticComparerTests()
         {
             _rangeItemComparer = new RangeItemComparer();
             _items = new RangeItem[]
@@ -32,7 +27,7 @@
             _tree = new RangeTree<int, RangeItem>(_items, _rangeItemComparer);
         }
 
-        [Test]
+        [Fact]
         public void CreateTree_ProvideComparer_ExpectComparerInAllNodes()
         {
             // Arrange
@@ -44,20 +39,20 @@
             // Assert
             foreach (var comparer in comparers)
             {
-                Assert.That(comparer, Is.EqualTo(_rangeItemComparer));
+                Assert.Equal(_rangeItemComparer, comparer);
             }
         }
 
-        [Test]
+        [Fact]
         public void CreateTree_GetAllNodes_ExpectAllNodesInAList()
         {
             // Arrange
-            
+
             // Act
             var nodes = GetAllNodes(_tree);
 
             // Assert
-            Assert.That(nodes.Count(), Is.EqualTo(3));
+            Assert.Equal(3, nodes.Count());
         }
 
         private static IEnumerable<RangeTreeNode<int, RangeItem>> GetAllNodes(RangeTree<int, RangeItem> rangeTree)
@@ -69,7 +64,7 @@
             foreach (var rangeTreeNode in TraverseNode(root))
             {
                 yield return rangeTreeNode;
-            }            
+            }
         }
 
         private static IEnumerable<RangeTreeNode<int, RangeItem>> TraverseNode(RangeTreeNode<int, RangeItem> rangeTreeNode)

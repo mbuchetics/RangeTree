@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MB.Algodat
+namespace RangeTree
 {
     /// <summary>
     /// A node of the range tree. Given a list of items, it builds

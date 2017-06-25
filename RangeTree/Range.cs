@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MB.Algodat
+namespace RangeTree
 {
     /// <summary>
     /// Represents a range of values. 
@@ -116,29 +116,5 @@ namespace MB.Algodat
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// Static helper class to create Range instances.
-    /// </summary>
-    public static class Range
-    {
-        /// <summary>
-        /// Creates and returns a new <see cref="Range&lt;T&gt;"/> instance.
-        /// </summary>
-        public static Range<T> Create<T>(T from, T to)
-            where T : IComparable<T>
-        {
-            return new Range<T>(from, to);
-        }
-    }
-
-    /// <summary>
-    /// Interface for classes which provide a range.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IRangeProvider<T> where T : IComparable<T>
-    {
-        Range<T> Range { get; }
     }
 }

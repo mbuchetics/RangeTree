@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MB.Algodat;
 using System.Diagnostics;
 
-namespace RangeTreeExamples
+namespace RangeTree.Examples
 {    
     class Program
     {

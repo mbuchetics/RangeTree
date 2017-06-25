@@ -2,17 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Reflection;
+    using RangeTree;
+    using RangeTree.Examples;
+    using Xunit;
 
-    using MB.Algodat;
-
-    using NUnit.Framework;
-
-    using RangeTreeExamples;
-
-    [TestFixture]
     public class MultipleComparerTests
     {
-        [Test]
+        [Fact]
         public void CreateTwoTrees_ProvideDifferentComparers_ExpectBothToHaveTheComparersFromConstruction()
         {
             var reverseItemComparer = new ReverseItemComparer();
@@ -24,8 +20,8 @@
             var comparerRangeTree1 = GetComparerViaReflection(rangeTree1);
             var comparerRangeTree2 = GetComparerViaReflection(rangeTree2);
 
-            Assert.That(comparerRangeTree1, Is.EqualTo(standardItemComparer));
-            Assert.That(comparerRangeTree2, Is.EqualTo(reverseItemComparer));
+            Assert.Equal(standardItemComparer, comparerRangeTree1);
+            Assert.Equal(reverseItemComparer, comparerRangeTree2);
         }
 
         private static object GetComparerViaReflection(RangeTree<int, RangeItem> rangeTree1)

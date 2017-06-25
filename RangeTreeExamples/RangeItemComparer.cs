@@ -1,4 +1,4 @@
-namespace RangeTreeExamples
+namespace RangeTree.Examples
 {
     using System.Collections.Generic;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MB.Algodat
+namespace RangeTree
 {
     /// <summary>
     /// Range tree interface.

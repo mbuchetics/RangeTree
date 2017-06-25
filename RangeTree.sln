@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTree", "RangeTree\RangeTree.csproj", "{9CC3EB9D-32D2-41E6-96EE-C01DC32A5AED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTree", "RangeTree\RangeTree.csproj", "{A12CFD40-6EA9-459A-84AD-2DF944E332CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTreeExamples", "RangeTreeExamples\RangeTreeExamples.csproj", "{6BC7FF9C-B44C-4C08-93F3-EC6ED3073140}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTree.Examples", "RangeTreeExamples\RangeTree.Examples.csproj", "{A2ECC374-8BB1-4B8C-AF67-062595E6FBDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTreeTests", "RangeTreeTests\RangeTreeTests.csproj", "{1D2C480E-9FC5-4F63-AB27-962215F71331}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTree.Test", "RangeTree.Test\RangeTree.Test.csproj", "{087BD1DE-623A-4C8B-A41B-E99938EC9296}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9CC3EB9D-32D2-41E6-96EE-C01DC32A5AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CC3EB9D-32D2-41E6-96EE-C01DC32A5AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CC3EB9D-32D2-41E6-96EE-C01DC32A5AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CC3EB9D-32D2-41E6-96EE-C01DC32A5AED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BC7FF9C-B44C-4C08-93F3-EC6ED3073140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BC7FF9C-B44C-4C08-93F3-EC6ED3073140}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BC7FF9C-B44C-4C08-93F3-EC6ED3073140}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BC7FF9C-B44C-4C08-93F3-EC6ED3073140}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D2C480E-9FC5-4F63-AB27-962215F71331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D2C480E-9FC5-4F63-AB27-962215F71331}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D2C480E-9FC5-4F63-AB27-962215F71331}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D2C480E-9FC5-4F63-AB27-962215F71331}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A12CFD40-6EA9-459A-84AD-2DF944E332CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A12CFD40-6EA9-459A-84AD-2DF944E332CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A12CFD40-6EA9-459A-84AD-2DF944E332CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A12CFD40-6EA9-459A-84AD-2DF944E332CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2ECC374-8BB1-4B8C-AF67-062595E6FBDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2ECC374-8BB1-4B8C-AF67-062595E6FBDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2ECC374-8BB1-4B8C-AF67-062595E6FBDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2ECC374-8BB1-4B8C-AF67-062595E6FBDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{087BD1DE-623A-4C8B-A41B-E99938EC9296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{087BD1DE-623A-4C8B-A41B-E99938EC9296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{087BD1DE-623A-4C8B-A41B-E99938EC9296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{087BD1DE-623A-4C8B-A41B-E99938EC9296}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
