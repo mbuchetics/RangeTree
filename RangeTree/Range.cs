@@ -6,29 +6,25 @@ namespace RangeTree
     /// Represents a range of values. Both values must be of the same type and comparable.
     /// </summary>
     /// <typeparam name="T">Type of the values.</typeparam>
-    public struct Range<T> : IComparable<Range<T>>
+    public class Range<T> : IComparable<Range<T>>
         where T : IComparable<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Range{T}"/> struct.
+        /// Initializes a new instance of the <see cref="Range{T}"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
         public Range(T value)
-           : this()
+            : this(value, value)
         {
-            From = value;
-            To = value;
         }
 
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="Range{T}"/> struct.
+        /// Initializes a new instance of the <see cref="Range{T}"/> class.
         /// </summary>
         /// <param name="from">The range from (start).</param>
         /// <param name="to">The range to (end).</param>
         /// <exception cref="System.ArgumentOutOfRangeException">from cannot be larger than to</exception>
         public Range(T from, T to)
-            : this()
         {
             if (from.CompareTo(to) == 1)
             {
@@ -97,6 +93,24 @@ namespace RangeTree
         public bool IntersectsExclusive(Range<T> other)
         {
             return other.To.CompareTo(From) > 0 && other.From.CompareTo(To) < 0;
+        }
+
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>
+        /// true if the specified object is equal to the current object; otherwise, false.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            Range<T> range = obj as Range<T>;
+            if (range == null)
+            {
+                return false;
+            }
+
+            return range.From.Equals(From) && range.To.Equals(To);
         }
 
         /// <summary>
