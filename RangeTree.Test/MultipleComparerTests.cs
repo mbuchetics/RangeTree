@@ -27,9 +27,9 @@
         private static object GetComparerViaReflection(RangeTree<int, RangeItem> rangeTree1)
         {
             var bindFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static;
-            var rootFieldInfo = typeof(RangeTree<int, RangeItem>).GetField("_root", bindFlags);
+            var rootFieldInfo = typeof(RangeTree<int, RangeItem>).GetField("root", bindFlags);
             var root = (RangeTreeNode<int, RangeItem>)rootFieldInfo.GetValue(rangeTree1);
-            var comparerFieldInfo = typeof(RangeTreeNode<int, RangeItem>).GetField("_rangeComparer", bindFlags);
+            var comparerFieldInfo = typeof(RangeTreeNode<int, RangeItem>).GetField("rangeComparer", bindFlags);
             var comparer = comparerFieldInfo.GetValue(root);
             return comparer;
         }

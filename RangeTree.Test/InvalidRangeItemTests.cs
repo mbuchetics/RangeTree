@@ -11,7 +11,7 @@
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => new RangeItem(2, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new RangeItem(2, 1, ""));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new RangeItem(2, 1, string.Empty));
         }
     }
 }

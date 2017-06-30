@@ -46,7 +46,9 @@ namespace RangeTree.Examples
             for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < 100; j++)
+                {
                     RandomTreeInsert(tree, 1000);
+                }
 
                 var resultCount = tree.Query(range).Count();
                 Console.WriteLine("query: {0} results (tree count: {1})", resultCount, tree.Count);
@@ -69,7 +71,9 @@ namespace RangeTree.Examples
             for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < 100; j++)
+                {
                     RandomTreeInsert(tree, 1000);
+                }
 
                 var resultCount = tree.Query(range).Count();
                 Console.WriteLine("query: {0} results (tree count: {1})", resultCount, tree.Count);
@@ -79,12 +83,12 @@ namespace RangeTree.Examples
             Console.WriteLine("elapsed time: {0}", stopwatch.Elapsed);
         }
 
-        static Random s_rnd = new Random();
+        static Random rnd = new Random();
         
         static void RandomTreeInsert(IRangeTree<int, RangeItem> tree, int limit)
         {
-            var a = s_rnd.Next(limit);
-            var b = s_rnd.Next(limit);
+            var a = rnd.Next(limit);
+            var b = rnd.Next(limit);
 
             tree.Add(new RangeItem(Math.Min(a, b), Math.Max(a, b)));
         }
@@ -93,7 +97,9 @@ namespace RangeTree.Examples
         {
             Console.WriteLine(queryTitle);
             foreach (var item in result)
+            {
                 Console.WriteLine(item);
+            }
         }
     }
 }
