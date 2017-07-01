@@ -17,12 +17,12 @@
     <PackageTags>range, tree, interval</PackageTags>
     <Version>1.0.0</Version>
     <PackageId>RangeTree</PackageId>
-    <Authors>Matthias Buchetics, Alexander Pacha</Authors>
+    <Authors>Matthias Buchetics, Alexander Pacha, Steve Hansen</Authors>
     <Product>RangeTree</Product>
     <PackageReleaseNotes>See a full list changes at https://github.com/mbuchetics/RangeTree/releases</PackageReleaseNotes>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>1.0.0</FileVersion>
-    <Company />
+    <Company>Matthias Buchetics, Alexander Pacha</Company>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
