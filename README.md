@@ -2,6 +2,7 @@ RangeTree
 =========
 
 [![Build status](https://ci.appveyor.com/api/projects/status/4safc7e687bl3j09?svg=true)](https://ci.appveyor.com/project/apacha/rangetree)
+[![NuGet version](https://img.shields.io/nuget/v/RangeTree.svg?style=flat-square)](https://www.nuget.org/packages/RangeTree)
 
 ## A generic and asynchronous interval tree
 
