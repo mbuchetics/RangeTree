@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/mbuchetics/RangeTree.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>range, tree, interval</PackageTags>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageId>RangeTree</PackageId>
     <Authors>Matthias Buchetics, Alexander Pacha, Steve Hansen</Authors>
     <Product>RangeTree</Product>
