@@ -16,15 +16,15 @@
         <language>en-US</language>
         <tags>range-tree algorithm search tree interval</tags>
         <dependencies>
-            <group targetFramework="netstandard1.2">
+            <group targetFramework="netstandard1.6">
                 <dependency id="NETStandard.Library" version="1.6.1" />
           </group>
         </dependencies>
     </metadata>
     <files>
-        <file src="..\RangeTree\bin\Release\netstandard1.2\.xml" target="lib\netstandard1.2\.xml" />
-        <file src="..\RangeTree\bin\Release\netstandard1.2\RangeTree.deps.json" target="lib\netstandard1.2\RangeTree.deps.json" />
-        <file src="..\RangeTree\bin\Release\netstandard1.2\RangeTree.dll" target="lib\netstandard1.2\RangeTree.dll" />
-        <file src="..\RangeTree\bin\Release\netstandard1.2\RangeTree.pdb" target="lib\netstandard1.2\RangeTree.pdb" />
+        <file src="..\RangeTree\bin\Release\netstandard1.6\.xml" target="lib\netstandard1.6\.xml" />
+        <file src="..\RangeTree\bin\Release\netstandard1.6\RangeTree.deps.json" target="lib\netstandard1.6\RangeTree.deps.json" />
+        <file src="..\RangeTree\bin\Release\netstandard1.6\RangeTree.dll" target="lib\netstandard1.6\RangeTree.dll" />
+        <file src="..\RangeTree\bin\Release\netstandard1.6\RangeTree.pdb" target="lib\netstandard1.6\RangeTree.pdb" />
     </files>
 </package>

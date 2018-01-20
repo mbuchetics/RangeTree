@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.2</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -9,13 +9,13 @@
     <Description>A generic implementation of a centered interval tree for dotnet.</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Copyright>Copyright (c) 2017, Matthias Buchetics and Alexander Pacha</Copyright>
+    <Copyright>Copyright (c) 2018, Matthias Buchetics and Alexander Pacha</Copyright>
     <PackageLicenseUrl>https://github.com/mbuchetics/RangeTree/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/mbuchetics/RangeTree</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mbuchetics/RangeTree.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>range, tree, interval</PackageTags>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageId>RangeTree</PackageId>
     <Authors>Matthias Buchetics, Alexander Pacha, Steve Hansen</Authors>
     <Product>RangeTree</Product>
