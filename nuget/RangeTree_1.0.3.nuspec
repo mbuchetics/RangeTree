@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>RangeTree</id>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
         <title>RangeTree - A generic interval tree implementation in C#</title>
         <authors>Matthias Buchetics,Alexander Pacha,Steve Hansen</authors>
         <owners>Matthias Buchetics,Alexander Pacha</owners>
@@ -11,20 +11,20 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>In computer science, an interval tree is an ordered tree data structure to hold intervals. Specifically, it allows one to efficiently find all intervals that overlap with any given interval or point. It is often used for windowing queries, for instance, to find all roads on a computerized map inside a rectangular viewport, or to find all visible elements inside a three-dimensional scene.</description>
         <summary>A generic implementation of a centered interval tree in C#. Also comes with an asynchronous version which rebuilds the tree using the Task Parallel Library (TPL).</summary>
-        <releaseNotes>Updated to NETStandard 1.6 and adding requirement into nuspec.</releaseNotes>
+        <releaseNotes>Reverting back to NETStandard 1.2 for maximum compatibility as a library.</releaseNotes>
         <copyright>Matthias Buchetics, Alexander Pacha 2018</copyright>
         <language>en-US</language>
         <tags>range-tree algorithm search tree interval</tags>
         <dependencies>
-            <group targetFramework="netstandard1.6">
+            <group targetFramework="netstandard1.2">
                 <dependency id="NETStandard.Library" version="1.6.1" />
           </group>
         </dependencies>
     </metadata>
     <files>
-        <file src="..\RangeTree\bin\Release\netstandard1.6\.xml" target="lib\netstandard1.6\.xml" />
-        <file src="..\RangeTree\bin\Release\netstandard1.6\RangeTree.deps.json" target="lib\netstandard1.6\RangeTree.deps.json" />
-        <file src="..\RangeTree\bin\Release\netstandard1.6\RangeTree.dll" target="lib\netstandard1.6\RangeTree.dll" />
-        <file src="..\RangeTree\bin\Release\netstandard1.6\RangeTree.pdb" target="lib\netstandard1.6\RangeTree.pdb" />
+        <file src="..\RangeTree\bin\Release\netstandard1.2\.xml" target="lib\netstandard1.2\.xml" />
+        <file src="..\RangeTree\bin\Release\netstandard1.2\RangeTree.deps.json" target="lib\netstandard1.2\RangeTree.deps.json" />
+        <file src="..\RangeTree\bin\Release\netstandard1.2\RangeTree.dll" target="lib\netstandard1.2\RangeTree.dll" />
+        <file src="..\RangeTree\bin\Release\netstandard1.2\RangeTree.pdb" target="lib\netstandard1.2\RangeTree.pdb" />
     </files>
 </package>

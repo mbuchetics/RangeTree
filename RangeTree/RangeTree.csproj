@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard1.2</TargetFramework>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/mbuchetics/RangeTree.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>range, tree, interval</PackageTags>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <PackageId>RangeTree</PackageId>
     <Authors>Matthias Buchetics, Alexander Pacha, Steve Hansen</Authors>
     <Product>RangeTree</Product>
