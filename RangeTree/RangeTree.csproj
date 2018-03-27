@@ -32,7 +32,7 @@ For a full list changes at https://github.com/mbuchetics/RangeTree/releases</Pac
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
 
   <PropertyGroup>
