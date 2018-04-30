@@ -46,7 +46,7 @@ First, create a class, that implements the `IRangeProvider`-interface that will 
     public class SimpleRangeItem : IRangeProvider<int>
     {
         public Range<int> Range { get; set; }
-        public string Descriptiong { get; set; }
+        public string Content { get; set; }
     }
 
 and an appropriate comparer, implementing the `IComparer<SimpleRangeItem>`-interface like this one
