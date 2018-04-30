@@ -19,7 +19,7 @@ Queries require O(log n + m) time, with n being the total number of intervals an
 
 .NET 4, Visual Studio 2010.
 
-### Simple Interface ###
+## Simple Interface ###
 
     public interface IRangeTree<TKey, T>
         where TKey : IComparable<TKey>
@@ -39,14 +39,34 @@ Queries require O(log n + m) time, with n being the total number of intervals an
         void Clear();
     }
     
-### Example ###
+## Usage ###
 
-    var tree = new RangeTree<int, RangeItem>(new RangeItemComparer());
+First, create a class, that implements the `IRangeProvider`-interface that will host your content and a range:
 
-    tree.Add(new RangeItem(0, 10, "1"));
-    tree.Add(new RangeItem(20, 30, "2"));
-    tree.Add(new RangeItem(15, 17, "3"));
-    tree.Add(new RangeItem(25, 35, "4"));
+    public class SimpleRangeItem : IRangeProvider<int>
+    {
+        public Range<int> Range { get; set; }
+        public string Descriptiong { get; set; }
+    }
+
+and an appropriate comparer, implementing the `IComparer<SimpleRangeItem>`-interface like this one
+
+    public class SimpleRangeItemComparer : IComparer<SimpleRangeItem>
+    {
+        public int Compare(SimpleRangeItem x, SimpleRangeItem y)
+        {
+            return x.Range.CompareTo(y.Range);
+        }
+    }
+
+and then create the typed `RangeTree`:
+
+    var tree = new RangeTree<int, SimpleRangeItem>(new SimpleRangeItemComparer());
+
+    tree.Add(new SimpleRangeItem {Range = new Range<int>(0 , 10), Content = "1"});
+    tree.Add(new SimpleRangeItem {Range = new Range<int>(20, 30), Content = "2"));
+    tree.Add(new SimpleRangeItem {Range = new Range<int>(15, 17), Content = "3"));
+    tree.Add(new SimpleRangeItem {Range = new Range<int>(25, 35), Content = "4"));
 
     var results1 = tree.Query(5);                     // 1 item: [0 - 10]
     var results2 = tree.Query(10);                    // 1 item: [0 - 10]
@@ -55,7 +75,7 @@ Queries require O(log n + m) time, with n being the total number of intervals an
     
 The solution file contains a few examples and also a comparision of the default and async versions.
     
-### Implementation Details ###
+## Implementation Details
 
 In the standard implementation, whenever you add or remove items from the tree, the tree goes "out of sync". Whenever it is queried next, the tree structure is then automatically rebuild (you can control this behaviour using the `AutoRebuild` flag). You may also call `Rebuild()` manually.
 The creation of the tree requires O(n log n) time. Therefore, the standard implementation is best suited for trees that do not change often or small trees, where the creation time is negligible.
