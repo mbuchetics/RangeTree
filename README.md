@@ -16,8 +16,8 @@ Based on the Java implementation found here: http://www.sanfoundry.com/java-prog
 Queries require O(log n + m) time, with n being the total number of intervals and m being the number of reported results. Construction requires O(n log n) time, and storage requires O(n) space.
 
 ### Requirements ###
-
-.NET 4, Visual Studio 2010.
+- Consuming this NuGet package requires .NET Framework >= 4.5 or .NET Standard >= 1.2
+- Developing this project requires Visual Studio 2017 with .NET Framework >= 4.5 and .NET Standard >= 2.0.
 
 ## Simple Interface ###
 
