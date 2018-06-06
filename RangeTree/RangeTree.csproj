@@ -16,14 +16,14 @@ In computer science, an interval tree is an ordered tree data structure to hold 
     <RepositoryUrl>https://github.com/mbuchetics/RangeTree.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>range, tree, interval</PackageTags>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <PackageId>RangeTree</PackageId>
     <Authors>Matthias Buchetics, Alexander Pacha, Steve Hansen</Authors>
     <Product>RangeTree  - A generic interval tree implementation in C#</Product>
-    <PackageReleaseNotes>Excluding StyleCopAnalyzer from dependencies in released binaries.
+    <PackageReleaseNotes>Fixing bug that an exception is thrown when querying an empty tree that previously had elements.
 For a full list changes at https://github.com/mbuchetics/RangeTree/releases</PackageReleaseNotes>
-    <AssemblyVersion>1.0.5</AssemblyVersion>
-    <FileVersion>1.0.5</FileVersion>
+    <AssemblyVersion>1.0.6</AssemblyVersion>
+    <FileVersion>1.0.6</FileVersion>
     <Company>Matthias Buchetics, Alexander Pacha</Company>
   </PropertyGroup>
   
