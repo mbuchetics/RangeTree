@@ -59,7 +59,10 @@ namespace RangeTree
             endPoints.Sort();
 
             // the median is used as center value
-            center = endPoints[endPoints.Count / 2];
+            if (endPoints.Count > 0)
+            {
+                center = endPoints[endPoints.Count / 2];
+            }
             this.items = new List<T>();
             
             var left = new List<T>();
