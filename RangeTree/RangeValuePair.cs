@@ -1,11 +1,14 @@
-﻿namespace RangeTree
+﻿using System;
+using System.Collections.Generic;
+
+namespace RangeTree
 {
     /// <summary>
     /// Represents a range of values.
     /// Both values must be of the same type and comparable.
     /// </summary>
     /// <typeparam name="TKey">Type of the values.</typeparam>
-    public struct RangeValuePair<TKey, TValue>
+    public struct RangeValuePair<TKey, TValue> : IEquatable<RangeValuePair<TKey, TValue>>
     {
         public TKey From { get; }
         public TKey To { get; }
@@ -42,6 +45,31 @@
             if (Value != null)
                 hash = hash * 37 + Value.GetHashCode();
             return hash;
+        }
+
+        public bool Equals(RangeValuePair<TKey, TValue> other)
+        {
+            return EqualityComparer<TKey>.Default.Equals(From, other.From)
+                   && EqualityComparer<TKey>.Default.Equals(To, other.To)
+                   && EqualityComparer<TValue>.Default.Equals(Value, other.Value);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is RangeValuePair<TKey, TValue>))
+                return false;
+
+            return Equals((RangeValuePair<TKey, TValue>)obj);
+        }
+
+        public static bool operator ==(RangeValuePair<TKey, TValue> left, RangeValuePair<TKey, TValue> right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(RangeValuePair<TKey, TValue> left, RangeValuePair<TKey, TValue> right)
+        {
+            return !(left == right);
         }
     }
 }
