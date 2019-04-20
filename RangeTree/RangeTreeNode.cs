@@ -51,7 +51,10 @@ namespace RangeTree
             endPoints.Sort(this.comparer);
 
             // the median is used as center value
-            center = endPoints[endPoints.Count / 2];
+            if (endPoints.Count > 0)
+            {
+                center = endPoints[endPoints.Count / 2];
+            }
 
             var inner = new List<RangeValuePair<TKey, TValue>>();
             var left = new List<RangeValuePair<TKey, TValue>>();
