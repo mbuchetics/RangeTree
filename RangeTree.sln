@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTree", "RangeTree\RangeTree.csproj", "{A12CFD40-6EA9-459A-84AD-2DF944E332CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTree.Examples", "RangeTreeExamples\RangeTree.Examples.csproj", "{A2ECC374-8BB1-4B8C-AF67-062595E6FBDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTreeExamples", "RangeTreeExamples\RangeTreeExamples.csproj", "{A2ECC374-8BB1-4B8C-AF67-062595E6FBDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTree.Test", "RangeTree.Test\RangeTree.Test.csproj", "{087BD1DE-623A-4C8B-A41B-E99938EC9296}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTreeTests", "RangeTreeTests\RangeTreeTests.csproj", "{087BD1DE-623A-4C8B-A41B-E99938EC9296}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

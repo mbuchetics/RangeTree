@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace RangeTree
 {
@@ -7,72 +6,68 @@ namespace RangeTree
     /// Range tree interface.
     /// </summary>
     /// <typeparam name="TKey">The type of the range.</typeparam>
-    /// <typeparam name="T">The type of the data items.</typeparam>
-    public interface IRangeTree<TKey, T>
-        where TKey : IComparable<TKey>
-        where T : IRangeProvider<TKey>
+    /// <typeparam name="TValue">The type of the data items.</typeparam>
+    public interface IRangeTree<TKey, TValue> : IEnumerable<RangeValuePair<TKey, TValue>>
     {
         /// <summary>
-        /// Gets the items.
+        /// Returns all items contained in the tree.
         /// </summary>
-        /// <value>
-        /// The items.
-        /// </value>
-        IEnumerable<T> Items { get; }
+        IEnumerable<TValue> Values { get; }
 
         /// <summary>
-        /// Gets the count.
+        /// Gets the number of elements contained in the tree.
         /// </summary>
-        /// <value>
-        /// The count.
-        /// </value>
         int Count { get; }
 
         /// <summary>
-        /// Queries the specified value.
+        /// Whether the tree should be rebuild automatically. Defaults to true.
+        ///
+        /// Keep in mind, that if you disable auto-rebuild, you have to call Rebuild manually,
+        /// after updating items in the tree or you will query an obsolete tree.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns></returns>
-        List<T> Query(TKey value);
+        bool AutoRebuild { get; set; }
 
         /// <summary>
-        /// Queries the specified range.
-        /// </summary>
-        /// <param name="range">The range.</param>
-        /// <returns></returns>
-        List<T> Query(Range<TKey> range);
-
-        /// <summary>
-        /// Rebuilds this instance.
+        /// Rebuilds the tree if it is out of sync.
         /// </summary>
         void Rebuild();
 
         /// <summary>
-        /// Adds the specified item.
+        /// Whether the tree is currently in sync or not. If it is "out of sync"
+        /// you can either rebuild it manually (call Rebuild) or let it rebuild
+        /// automatically when you query it next.
+        ///
+        /// Most of the time, you can simply ignore this, as the tree keeps track of whether it needs rebuilding.
         /// </summary>
-        /// <param name="item">The item.</param>
-        void Add(T item);
+        bool IsInSync { get; }
 
         /// <summary>
-        /// Adds the specified items.
+        /// Performs a point query with a single value. All items with overlapping ranges are returned.
         /// </summary>
-        /// <param name="items">The items.</param>
-        void Add(IEnumerable<T> items);
+        IEnumerable<TValue> Query(TKey value);
 
+        /// <summary>
+        /// Performs a range query. All items with overlapping ranges are returned.
+        /// </summary>
+        IEnumerable<TValue> Query(TKey from, TKey to);
+        
+        /// <summary>
+        /// Adds the specified item.
+        /// </summary>
+        void Add(TKey from, TKey to, TValue value);
+        
         /// <summary>
         /// Removes the specified item.
         /// </summary>
-        /// <param name="item">The item.</param>
-        void Remove(T item);
+        void Remove(TValue item);
 
         /// <summary>
         /// Removes the specified items.
         /// </summary>
-        /// <param name="items">The items.</param>
-        void Remove(IEnumerable<T> items);
+        void Remove(IEnumerable<TValue> items);
 
         /// <summary>
-        /// Clears this instance.
+        /// Removes all elements from the range tree.
         /// </summary>
         void Clear();
     }
