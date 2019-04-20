@@ -53,10 +53,10 @@ var tree = new RangeTree<int, string>()
 // Alternatively, use the Add method, for example:
 // tree.Add(0, 10, "1");
 
-var results1 = tree[5];     // 1 item: [0 - 10] "1"
-var results2 = tree[10];    // 1 item: [0 - 10] "1"
-var results3 = tree[29];    // 2 items: [20 - 30] "2", [25 - 35] "4"
-var results4 = tree[5, 15]; // 2 items: [0 - 10] "1", [15 - 17] "3"
+var results1 = tree.Query(5);     // 1 item: [0 - 10]
+var results2 = tree.Query(10);    // 1 item: [0 - 10]
+var results3 = tree.Query(29);    // 2 items: [20 - 30], [25 - 35]
+var results4 = tree.Query(5, 15); // 2 items: [0 - 10], [15 - 17]
 ```
     
 The solution file contains a few examples and also a comparision of the default and async versions.

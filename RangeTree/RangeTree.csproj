@@ -20,7 +20,8 @@ In computer science, an interval tree is an ordered tree data structure to hold 
     <PackageId>RangeTree</PackageId>
     <Authors>Matthias Buchetics, Alexander Pacha, Steve Hansen, Erik Domke</Authors>
     <Product>RangeTree  - A generic interval tree implementation in C#</Product>
-    <PackageReleaseNotes>Fixing bug that an exception is thrown when querying an empty tree that previously had elements.
+    <PackageReleaseNotes>Major overhaul by Erik Domke to a nice and cleaner interface.
+Support for async version has been dropped and Rebuild / AutoRebuild functionality is now only internal (there was no reason for making it accessible from the outside anyway).
 For a full list changes at https://github.com/mbuchetics/RangeTree/releases</PackageReleaseNotes>
     <AssemblyVersion>2.0.0</AssemblyVersion>
     <FileVersion>2.0.0</FileVersion>
