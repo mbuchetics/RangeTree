@@ -3,7 +3,9 @@
 namespace RangeTree
 {
     /// <summary>
-    /// Range tree interface.
+    /// The standard range tree implementation. Keeps a root node and forwards all queries to it.
+    /// Whenever new items are added or items are removed, the tree goes temporarily "out of sync", which means that the
+    /// internal index is not updated immediately, but upon the next query operation.    
     /// </summary>
     /// <typeparam name="TKey">The type of the range.</typeparam>
     /// <typeparam name="TValue">The type of the data items.</typeparam>
@@ -18,28 +20,6 @@ namespace RangeTree
         /// Gets the number of elements contained in the tree.
         /// </summary>
         int Count { get; }
-
-        /// <summary>
-        /// Whether the tree should be rebuild automatically. Defaults to true.
-        ///
-        /// Keep in mind, that if you disable auto-rebuild, you have to call Rebuild manually,
-        /// after updating items in the tree or you will query an obsolete tree.
-        /// </summary>
-        bool AutoRebuild { get; set; }
-
-        /// <summary>
-        /// Rebuilds the tree if it is out of sync.
-        /// </summary>
-        void Rebuild();
-
-        /// <summary>
-        /// Whether the tree is currently in sync or not. If it is "out of sync"
-        /// you can either rebuild it manually (call Rebuild) or let it rebuild
-        /// automatically when you query it next.
-        ///
-        /// Most of the time, you can simply ignore this, as the tree keeps track of whether it needs rebuilding.
-        /// </summary>
-        bool IsInSync { get; }
 
         /// <summary>
         /// Performs a point query with a single value. All items with overlapping ranges are returned.

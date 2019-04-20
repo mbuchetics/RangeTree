@@ -63,5 +63,5 @@ The solution file contains a few examples and also a comparision of the default 
     
 ## Implementation Details
 
-In the standard implementation, whenever you add or remove items from the tree, the tree goes "out of sync". Whenever it is queried next, the tree structure is then automatically rebuild (you can control this behaviour using the `AutoRebuild` flag). You may also call `Rebuild()` manually.
-The creation of the tree requires O(n log n) time. Therefore, the standard implementation is best suited for trees that do not change often or small trees, where the creation time is negligible.
+In the standard implementation, whenever you add or remove items from the tree, the tree goes "out of sync". Whenever it is queried next, the tree structure is then automatically rebuild.
+The creation of the tree requires `O(n log n)` time. Therefore, the standard implementation is best suited for trees that do not change often or small trees, where the creation time is negligible.

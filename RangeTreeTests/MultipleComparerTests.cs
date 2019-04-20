@@ -5,7 +5,6 @@ using RangeTree;
 
 namespace RangeTreeTests
 {
-
     [TestFixture]
     public class MultipleComparerTests
     {

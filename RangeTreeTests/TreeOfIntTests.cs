@@ -11,7 +11,6 @@ namespace RangeTreeTests
         public void BuildEmptyIntervalTree()
         {
             var emptyTree = new RangeTree<int, int>();
-            emptyTree.Rebuild();
             Assert.Pass();
         }
 
@@ -51,12 +50,15 @@ namespace RangeTreeTests
         public void QueryOutOfSyncTree_ExpectObsoleteResults()
         {
             var tree = new RangeTree<int, int>();
-            tree.AutoRebuild = false;
             tree.Add(0, 10, 100);
-            tree.Add(3, 30, 200);
 
             var result = tree.Query(5).ToList();
-            Assert.AreEqual(0, result.Count);
+            Assert.AreEqual(1, result.Count);
+
+            tree.Add(3, 30, 200);
+
+            result = tree.Query(5).ToList();
+            Assert.AreEqual(2, result.Count);
         }
     }
 }

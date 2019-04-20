@@ -35,6 +35,7 @@ namespace RangeTree
         /// <summary>
         /// Initializes a node with a list of items, builds the sub tree.
         /// </summary>
+        /// <param name="items">The items that should be added to this node</param>
         /// <param name="comparer">The comparer used to compare two items.</param>
         public RangeTreeNode(IList<RangeValuePair<TKey, TValue>> items, IComparer<TKey> comparer)
         {
@@ -157,7 +158,8 @@ namespace RangeTree
         /// If both are equal, the comparison of the To values is returned.
         /// 0 if both ranges are equal.
         /// </summary>
-        /// <param name="y">The other.</param>
+        /// <param name="x">The first item.</param>
+        /// <param name="y">The other item.</param>
         /// <returns></returns>
         int IComparer<RangeValuePair<TKey, TValue>>.Compare(RangeValuePair<TKey, TValue> x, RangeValuePair<TKey, TValue> y)
         {

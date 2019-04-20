@@ -14,7 +14,6 @@ namespace RangeTreeTests
         public void BuildEmptyIntervalTree()
         {
             var emptyTree = new RangeTree<DateTime, int>();
-            emptyTree.Rebuild();
             Assert.Pass();
         }
 
@@ -35,7 +34,6 @@ namespace RangeTreeTests
             Assert.AreEqual(1, result.Count);
         }
 
-
         [Test]
         public void GetIntervalByExactStartTime()
         {
@@ -45,7 +43,6 @@ namespace RangeTreeTests
             var result = tree.Query(ZERO).ToList();
             Assert.AreEqual(1, result.Count);
         }
-
 
         /// <summary>
         ///     0-----5-----10------15--------20
@@ -76,7 +73,6 @@ namespace RangeTreeTests
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual(100, result[0]);
         }
-
 
         [Test]
         public void TwoIntersectingIntervals()

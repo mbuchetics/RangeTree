@@ -47,7 +47,9 @@ namespace RangeTreeExamples
             for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < 100; j++)
+                {
                     RandomTreeInsert(tree, 1000);
+                }
 
                 var resultCount = tree.Query(50, 60).Count();
                 Console.WriteLine("query: {0} results (tree count: {1})", resultCount, tree.Count);
@@ -71,7 +73,9 @@ namespace RangeTreeExamples
         {
             Console.WriteLine(queryTitle);
             foreach (var item in result)
+            {
                 Console.WriteLine(item);
+            }
         }
     }
 }

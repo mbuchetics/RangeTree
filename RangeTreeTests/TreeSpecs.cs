@@ -8,7 +8,6 @@ using RangeTree;
 
 namespace RangeTreeTests
 {
-
     [TestFixture]
     public class If_the_user_searches_for_overlapping_entries_in_an_interval_tree : Spec
     {
@@ -46,7 +45,8 @@ namespace RangeTreeTests
             }
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test]
+        [TestCaseSource("TestCases")]
         public int CorrectQuery_BuiltInOrder(Tuple<int, int> value)
         {
             var tree = CreateTree(TestEntries().OrderBy(interval => interval.Item1));
@@ -55,7 +55,8 @@ namespace RangeTreeTests
                 .Count();
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test]
+        [TestCaseSource("TestCases")]
         public int CorrectQuery_BuiltInReverseOrder(Tuple<int, int> value)
         {
             var tree = CreateTree(TestEntries().OrderBy(interval => interval.Item1).Reverse());
@@ -64,7 +65,8 @@ namespace RangeTreeTests
                 .Count();
         }
 
-        [Test, TestCaseSource("TestCases")]
+        [Test]
+        [TestCaseSource("TestCases")]
         public int CorrectQuery_BuiltRandomly(Tuple<int, int> value)
         {
             var tree = CreateTree(TestEntries());
@@ -89,7 +91,8 @@ namespace RangeTreeTests
     /// <summary>
     /// Abstract helper class to make nunit tests more readable.
     /// </summary>
-    [DebuggerStepThrough, DebuggerNonUserCode]
+    [DebuggerStepThrough]
+    [DebuggerNonUserCode]
     public class Spec
     {
         [DebuggerStepThrough]
