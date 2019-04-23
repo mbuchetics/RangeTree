@@ -33,7 +33,7 @@ namespace RangeTree
         /// </summary>
         public RangeTree(IComparer<TKey> comparer)
         {
-            this.comparer = comparer;
+            this.comparer = comparer ?? Comparer<TKey>.Default;
             isInSync = true;
             root = new RangeTreeNode<TKey, TValue>(this.comparer);
             items = new List<RangeValuePair<TKey, TValue>>();
@@ -57,7 +57,7 @@ namespace RangeTree
 
         public void Add(TKey from, TKey to, TValue value)
         {
-            if (comparer.Compare(from, to) == 1)
+            if (comparer.Compare(from, to) > 0)
                 throw new ArgumentOutOfRangeException($"{nameof(from)} cannot be larger than {nameof(to)}");
 
             isInSync = false;
@@ -72,7 +72,7 @@ namespace RangeTree
 
         public void Remove(IEnumerable<TValue> items)
         {
-            isInSync = false;            
+            isInSync = false;
             this.items = this.items.Where(l => !items.Contains(l.Value)).ToList();
         }
 
