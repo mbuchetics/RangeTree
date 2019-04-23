@@ -8,7 +8,7 @@ namespace RangeTree
     /// Both values must be of the same type and comparable.
     /// </summary>
     /// <typeparam name="TKey">Type of the values.</typeparam>
-    public readonly struct RangeValuePair<TKey, TValue> : IEquatable<RangeValuePair<TKey, TValue>>
+    public struct RangeValuePair<TKey, TValue> : IEquatable<RangeValuePair<TKey, TValue>>
     {
         public TKey From { get; }
         public TKey To { get; }
