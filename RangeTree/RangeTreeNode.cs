@@ -190,9 +190,9 @@ namespace RangeTree
             get
             {
                 if (leftNode != null)
-                    return leftNode.Max;
+                    return leftNode.Min;
                 else if (items != null)
-                    return items.Max(i => i.From);
+                    return items.Min(i => i.From);
                 else
                     return default(TKey);
             }

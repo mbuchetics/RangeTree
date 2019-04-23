@@ -14,10 +14,27 @@ namespace RangeTree
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public TKey Max => root.Max;
+        public TKey Max
+        {
+            get
+            {
+                if (!isInSync)
+                    Rebuild();
 
-        public TKey Min => root.Min;
+                return root.Max;
+            }
+        }
 
+        public TKey Min
+        {
+            get
+            {
+                if (!isInSync)
+                    Rebuild();
+
+                return root.Min;
+            }
+        }
 
         public IEnumerable<TValue> Values => items.Select(i => i.Value);
 
