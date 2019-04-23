@@ -11,10 +11,10 @@ namespace RangeTree
     /// </summary>
     internal class RangeTreeNode<TKey, TValue> : IComparer<RangeValuePair<TKey, TValue>>
     {
-        private TKey center;
-        private RangeTreeNode<TKey, TValue> leftNode;
-        private RangeTreeNode<TKey, TValue> rightNode;
-        private RangeValuePair<TKey, TValue>[] items;
+        private readonly TKey center;
+        private readonly RangeTreeNode<TKey, TValue> leftNode;
+        private readonly RangeTreeNode<TKey, TValue> rightNode;
+        private readonly RangeValuePair<TKey, TValue>[] items;
 
         private readonly IComparer<TKey> comparer;
 
