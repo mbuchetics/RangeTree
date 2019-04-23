@@ -18,7 +18,7 @@ namespace RangeTreeTests
         public void CreateEmptyIntervalTree()
         {
             var emptyTree = new RangeTree<int, int>();
-            Assert.IsNotNull(emptyTree);
+            Assert.That(emptyTree, Is.Not.Null);
         }
 
         [Test]
@@ -29,8 +29,8 @@ namespace RangeTreeTests
             tree.Add(20, 30, 200);
 
             var result = tree.Query(5).ToList();
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(100, result[0]);
+            Assert.That(result.Count, Is.EqualTo(1));
+            Assert.That(result[0], Is.EqualTo(100));
         }
 
         [Test]
@@ -41,9 +41,9 @@ namespace RangeTreeTests
             tree.Add(3, 30, 200);
 
             var result = tree.Query(5).ToList();
-            Assert.AreEqual(2, result.Count);
-            Assert.AreEqual(100, result[0]);
-            Assert.AreEqual(200, result[1]);
+            Assert.That(result.Count, Is.EqualTo(2));
+            Assert.That(result[0], Is.EqualTo(100));
+            Assert.That(result[1], Is.EqualTo(200));
         }
 
         [Test]
@@ -53,12 +53,12 @@ namespace RangeTreeTests
             tree.Add(0, 10, 100);
 
             var result = tree.Query(5).ToList();
-            Assert.AreEqual(1, result.Count);
+            Assert.That(result.Count, Is.EqualTo(1));
 
             tree.Add(3, 30, 200);
 
             result = tree.Query(5).ToList();
-            Assert.AreEqual(2, result.Count);
+            Assert.That(result.Count, Is.EqualTo(2));
         }
     }
 }

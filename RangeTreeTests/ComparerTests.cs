@@ -16,9 +16,7 @@ namespace RangeTreeTests
             var comparer = Comparer<int>.Create((x, y) => x - y);
             var tree = new RangeTree<int, string>(comparer);
 
-            TestDelegate act = () => tree.Add(2, 0, "FOO");
-
-            Assert.Throws<ArgumentOutOfRangeException>(act);
+            Assert.That(() => tree.Add(2, 0, "FOO"), Throws.InstanceOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
@@ -26,9 +24,7 @@ namespace RangeTreeTests
         {
             var tree = new RangeTree<int, string>(null);
 
-            TestDelegate act = () => tree.Add(0, 1, "FOO");
-
-            Assert.DoesNotThrow(act);
+            Assert.That(() => tree.Add(0, 1, "FOO"), Throws.Nothing);
         }
     }
 }

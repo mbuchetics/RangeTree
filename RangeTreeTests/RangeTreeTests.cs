@@ -21,7 +21,7 @@ namespace RangeTreeTests
 
             var min = tree.Min;
 
-            Assert.AreEqual(1, min);
+            Assert.That(min, Is.EqualTo(1));
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace RangeTreeTests
 
             var min = tree.Min;
 
-            Assert.AreEqual(1, min);
+            Assert.That(min, Is.EqualTo(1));
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace RangeTreeTests
 
             var max = tree.Max;
 
-            Assert.AreEqual(4, max);
+            Assert.That(max, Is.EqualTo(4));
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace RangeTreeTests
 
             var max = tree.Max;
 
-            Assert.AreEqual(6, max);
+            Assert.That(max, Is.EqualTo(6));
         }
     }
 }
