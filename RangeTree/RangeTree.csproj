@@ -10,7 +10,7 @@
 In computer science, an interval tree is an ordered tree data structure to hold intervals. Specifically, it allows one to efficiently find all intervals that overlap with any given interval or point. It is often used for windowing queries, for instance, to find all roads on a computerized map inside a rectangular viewport, or to find all visible elements inside a three-dimensional scene.</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Copyright>Copyright (c) 2019, Matthias Buchetics, Alexander Pacha, Steve Hansen, Erik Domke</Copyright>
+    <Copyright>Copyright (c) 2019, Matthias Buchetics and Alexander Pacha</Copyright>
     <PackageLicenseUrl>https://github.com/mbuchetics/RangeTree/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/mbuchetics/RangeTree</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mbuchetics/RangeTree.git</RepositoryUrl>
