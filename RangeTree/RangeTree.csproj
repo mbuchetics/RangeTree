@@ -16,15 +16,15 @@ In computer science, an interval tree is an ordered tree data structure to hold 
     <RepositoryUrl>https://github.com/mbuchetics/RangeTree.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>range, tree, interval</PackageTags>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <PackageId>RangeTree</PackageId>
-    <Authors>Matthias Buchetics, Alexander Pacha, Steve Hansen, Erik Domke</Authors>
+    <Authors>Matthias Buchetics, Alexander Pacha and others, see CONTRIBUTORS.md</Authors>
     <Product>RangeTree  - A generic interval tree implementation in C#</Product>
     <PackageReleaseNotes>Major overhaul by Erik Domke to a nice and cleaner interface.
 Support for async version has been dropped and Rebuild / AutoRebuild functionality is now only internal (there was no reason for making it accessible from the outside anyway).
 For a full list changes at https://github.com/mbuchetics/RangeTree/releases</PackageReleaseNotes>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
-    <FileVersion>2.0.0</FileVersion>
+    <AssemblyVersion>2.0.1</AssemblyVersion>
+    <FileVersion>2.0.1</FileVersion>
     <Company>Matthias Buchetics, Alexander Pacha</Company>
   </PropertyGroup>
   
