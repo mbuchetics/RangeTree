@@ -1,10 +1,9 @@
-RangeTree
-=========
+# RangeTree #
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dlxg91hh1qrrfsex?svg=true)](https://ci.appveyor.com/project/apacha/rangetree)
 [![NuGet version](https://img.shields.io/nuget/v/RangeTree.svg?style=flat-square)](https://www.nuget.org/packages/RangeTree)
 
-## A generic and asynchronous interval tree
+## A generic interval tree ##
 
 A generic implementation of a centered interval tree in C#. 
 
@@ -31,7 +30,6 @@ public interface IRangeTree<TKey, TValue>
     IEnumerable<TValue> Query(TKey value);
     IEnumerable<TValue> Query(TKey from, TKey to);
 
-    void Rebuild();
     void Add(TKey from, TKey to, TValue value);
     void Remove(TValue item);
     void Remove(IEnumerable<TValue> items);
@@ -59,9 +57,8 @@ var results3 = tree.Query(29);    // 2 items: [20 - 30], [25 - 35]
 var results4 = tree.Query(5, 15); // 2 items: [0 - 10], [15 - 17]
 ```
     
-The solution file contains a few examples and also a comparision of the default and async versions.
+The solution file contains a more examples and tests, that show how to use RangeTree with other data types.
     
-## Implementation Details
+## Implementation Details ##
 
-In the standard implementation, whenever you add or remove items from the tree, the tree goes "out of sync". Whenever it is queried next, the tree structure is then automatically rebuild.
-The creation of the tree requires `O(n log n)` time. Therefore, the standard implementation is best suited for trees that do not change often or small trees, where the creation time is negligible.
+In this implementation, whenever you add or remove items from the tree, the tree goes "out of sync" internally, which means that the items are stored, but the tree-index is not updated yet. Upon the next query, the tree structure is automatically rebuild. Subsequent queries will use the cached index and be much faster. The creation of the tree-index requires `O(n log n)` time. Therefore, it is best suited for trees that do not change often or small trees, where the creation time is negligible.
