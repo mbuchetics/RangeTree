@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using IntervalTree;
+using System.Diagnostics;
+using RangeTree;
 
-namespace IntervalTreeExamples
+namespace RangeTreeExamples
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main_Obsolete(string[] args)
         {
             TreeExample1();
             TreeExample2();
@@ -20,7 +20,7 @@ namespace IntervalTreeExamples
         {
             Console.WriteLine("Example 1");
 
-            var tree = new IntervalTree<int, string>()
+            var tree = new RangeTree<int, string>()
             {
                 { 0, 10, "1" },
                 { 20, 30, "2" },
@@ -32,6 +32,7 @@ namespace IntervalTreeExamples
             PrintQueryResult("query 2", tree.Query(10));
             PrintQueryResult("query 3", tree.Query(29));
             PrintQueryResult("query 4", tree.Query(5, 15));
+            PrintQueryResult("query 5", tree.Query(0, Int32.MaxValue));
 
             Console.WriteLine();
         }
@@ -40,7 +41,7 @@ namespace IntervalTreeExamples
         {
             Console.WriteLine("Example 2");
 
-            var tree = new IntervalTree<int, string>();
+            var tree = new RangeTree<int, string>();
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -59,12 +60,12 @@ namespace IntervalTreeExamples
             Console.WriteLine("elapsed time: {0}", stopwatch.Elapsed);
         }
 
-        static Random random = new Random();
+        static Random s_rnd = new Random();
 
-        static void RandomTreeInsert(IIntervalTree<int, string> tree, int limit)
+        static void RandomTreeInsert(IRangeTree<int, string> tree, int limit)
         {
-            var a = random.Next(limit);
-            var b = random.Next(limit);
+            var a = s_rnd.Next(limit);
+            var b = s_rnd.Next(limit);
 
             tree.Add(Math.Min(a, b), Math.Max(a, b), "value");
         }

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using IntervalTree;
+using RangeTree;
 
-namespace IntervalTreeTests
+namespace RangeTreeTests
 {
     [TestFixture]
     internal class TreeOfIntTests
@@ -10,21 +10,21 @@ namespace IntervalTreeTests
         [Test]
         public void BuildEmptyIntervalTree()
         {
-            var emptyTree = new IntervalTree<int, int>();
+            var emptyTree = new RangeTree<int, int>();
             Assert.Pass();
         }
 
         [Test]
         public void CreateEmptyIntervalTree()
         {
-            var emptyTree = new IntervalTree<int, int>();
+            var emptyTree = new RangeTree<int, int>();
             Assert.That(emptyTree, Is.Not.Null);
         }
 
         [Test]
         public void TestSeparateIntervals()
         {
-            var tree = new IntervalTree<int, int>();
+            var tree = new RangeTree<int, int>();
             tree.Add(0, 10, 100);
             tree.Add(20, 30, 200);
 
@@ -36,7 +36,7 @@ namespace IntervalTreeTests
         [Test]
         public void TwoIntersectingIntervals()
         {
-            var tree = new IntervalTree<int, int>();
+            var tree = new RangeTree<int, int>();
             tree.Add(0, 10, 100);
             tree.Add(3, 30, 200);
 
@@ -49,7 +49,7 @@ namespace IntervalTreeTests
         [Test]
         public void QueryOutOfSyncTree_ExpectObsoleteResults()
         {
-            var tree = new IntervalTree<int, int>();
+            var tree = new RangeTree<int, int>();
             tree.Add(0, 10, 100);
 
             var result = tree.Query(5).ToList();

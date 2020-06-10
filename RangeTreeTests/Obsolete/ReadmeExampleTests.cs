@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using IntervalTree;
+using RangeTree;
 
-namespace IntervalTreeTests
+namespace RangeTreeTests
 {
     [TestFixture]
     public class ReadmeExampleTests
@@ -10,7 +10,7 @@ namespace IntervalTreeTests
         [Test]
         public void Query_CreateTreeAndExecuteQuery_ExpectCorrectElementsToBeReturned()
         {
-            var tree = new IntervalTree<int, string>()
+            var tree = new RangeTree<int, string>()
             {
                 { 0, 10, "1" },
                 { 20, 30, "2" },

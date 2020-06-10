@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace RangeTree
+namespace IntervalTree
 {
     /// <summary>
     /// A node of the range tree. Given a list of items, it builds
     /// its subtree. Also contains methods to query the subtree.
     /// Basically, all interval tree logic is here.
     /// </summary>
-    internal class RangeTreeNode<TKey, TValue> : IComparer<RangeValuePair<TKey, TValue>>
+    internal class IntervalTreeNode<TKey, TValue> : IComparer<RangeValuePair<TKey, TValue>>
     {
         private readonly TKey center;
-        private readonly RangeTreeNode<TKey, TValue> leftNode;
-        private readonly RangeTreeNode<TKey, TValue> rightNode;
+        private readonly IntervalTreeNode<TKey, TValue> leftNode;
+        private readonly IntervalTreeNode<TKey, TValue> rightNode;
         private readonly RangeValuePair<TKey, TValue>[] items;
 
         private readonly IComparer<TKey> comparer;
@@ -22,7 +21,7 @@ namespace RangeTree
         /// Initializes an empty node.
         /// </summary>
         /// <param name="comparer">The comparer used to compare two items.</param>
-        public RangeTreeNode(IComparer<TKey> comparer)
+        public IntervalTreeNode(IComparer<TKey> comparer)
         {
             this.comparer = comparer ?? Comparer<TKey>.Default;
 
@@ -37,7 +36,7 @@ namespace RangeTree
         /// </summary>
         /// <param name="items">The items that should be added to this node</param>
         /// <param name="comparer">The comparer used to compare two items.</param>
-        public RangeTreeNode(IList<RangeValuePair<TKey, TValue>> items, IComparer<TKey> comparer)
+        public IntervalTreeNode(IList<RangeValuePair<TKey, TValue>> items, IComparer<TKey> comparer)
         {
             this.comparer = comparer ?? Comparer<TKey>.Default;
 
@@ -88,9 +87,9 @@ namespace RangeTree
 
             // create left and right nodes, if there are any items
             if (left.Count > 0)
-                leftNode = new RangeTreeNode<TKey, TValue>(left, this.comparer);
+                leftNode = new IntervalTreeNode<TKey, TValue>(left, this.comparer);
             if (right.Count > 0)
-                rightNode = new RangeTreeNode<TKey, TValue>(right, this.comparer);
+                rightNode = new IntervalTreeNode<TKey, TValue>(right, this.comparer);
         }
 
         /// <summary>

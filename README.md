@@ -1,4 +1,4 @@
-# RangeTree #
+# IntervalTree #
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dlxg91hh1qrrfsex?svg=true)](https://ci.appveyor.com/project/apacha/rangetree)
 [![NuGet version](https://img.shields.io/nuget/v/RangeTree.svg?style=flat-square)](https://www.nuget.org/packages/RangeTree)
@@ -21,7 +21,7 @@ Queries require `O(log n + m)` time, with `n` being the total number of interval
 ## Simple Interface ###
 
 ```csharp
-public interface IRangeTree<TKey, TValue> 
+public interface IIntervalTree<TKey, TValue> 
     : IEnumerable<RangeValuePair<TKey, TValue>>
 {
     IEnumerable<TValue> Values { get; }
@@ -40,7 +40,7 @@ public interface IRangeTree<TKey, TValue>
 ## Usage ###
 
 ```csharp
-var tree = new RangeTree<int, string>()
+var tree = new IntervalTree<int, string>()
 {
     { 0, 10, "1" },
     { 20, 30, "2" },
@@ -57,7 +57,7 @@ var results3 = tree.Query(29);    // 2 items: [20 - 30], [25 - 35]
 var results4 = tree.Query(5, 15); // 2 items: [0 - 10], [15 - 17]
 ```
     
-The solution file contains a more examples and tests, that show how to use RangeTree with other data types.
+The solution file contains a more examples and tests, that show how to use IntervalTree with other data types.
     
 ## Implementation Details ##
 

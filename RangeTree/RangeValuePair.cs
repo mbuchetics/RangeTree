@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RangeTree
+namespace IntervalTree
 {
     /// <summary>
     /// Represents a range of values.
     /// Both values must be of the same type and comparable.
     /// </summary>
     /// <typeparam name="TKey">Type of the values.</typeparam>
-    public struct RangeValuePair<TKey, TValue> : IEquatable<RangeValuePair<TKey, TValue>>
+    public readonly struct RangeValuePair<TKey, TValue> : IEquatable<RangeValuePair<TKey, TValue>>
     {
         public TKey From { get; }
         public TKey To { get; }

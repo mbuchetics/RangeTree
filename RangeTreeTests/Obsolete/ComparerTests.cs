@@ -1,9 +1,11 @@
-﻿using System;
+﻿using NUnit.Framework;
+using RangeTree;
+using System;
 using System.Collections.Generic;
-using IntervalTree;
-using NUnit.Framework;
+using System.Linq;
+using System.Text;
 
-namespace IntervalTreeTests
+namespace RangeTreeTests
 {
     [TestFixture]
     public class ComparerTests
@@ -12,7 +14,7 @@ namespace IntervalTreeTests
         public void AddingAnItem_FromIsLargerThanTo_ShouldThrowException()
         {
             var comparer = Comparer<int>.Create((x, y) => x - y);
-            var tree = new IntervalTree<int, string>(comparer);
+            var tree = new RangeTree<int, string>(comparer);
 
             Assert.That(() => tree.Add(2, 0, "FOO"), Throws.InstanceOf<ArgumentOutOfRangeException>());
         }
@@ -20,7 +22,7 @@ namespace IntervalTreeTests
         [Test]
         public void CreatingTreeWithNullComparer_AddingAnItem_ShouldNotThrowException()
         {
-            var tree = new IntervalTree<int, string>(null);
+            var tree = new RangeTree<int, string>(null);
 
             Assert.That(() => tree.Add(0, 1, "FOO"), Throws.Nothing);
         }

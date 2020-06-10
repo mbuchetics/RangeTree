@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTree", "RangeTree\RangeTree.csproj", "{A12CFD40-6EA9-459A-84AD-2DF944E332CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntervalTree", "RangeTree\IntervalTree.csproj", "{A12CFD40-6EA9-459A-84AD-2DF944E332CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTreeExamples", "RangeTreeExamples\RangeTreeExamples.csproj", "{A2ECC374-8BB1-4B8C-AF67-062595E6FBDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntervalTreeExamples", "RangeTreeExamples\IntervalTreeExamples.csproj", "{A2ECC374-8BB1-4B8C-AF67-062595E6FBDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeTreeTests", "RangeTreeTests\RangeTreeTests.csproj", "{087BD1DE-623A-4C8B-A41B-E99938EC9296}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntervalTreeTests", "RangeTreeTests\IntervalTreeTests.csproj", "{087BD1DE-623A-4C8B-A41B-E99938EC9296}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECFD1131-4EBD-489E-81BE-550DBF8805EF}
 	EndGlobalSection
 EndGlobal

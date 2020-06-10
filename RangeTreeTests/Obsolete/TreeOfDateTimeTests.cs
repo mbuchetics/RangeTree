@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using IntervalTree;
+using RangeTree;
 
-namespace IntervalTreeTests
+namespace RangeTreeTests
 {
     [TestFixture]
     internal class TreeOfDateTimeTests
@@ -13,21 +13,21 @@ namespace IntervalTreeTests
         [Test]
         public void BuildEmptyIntervalTree()
         {
-            var emptyTree = new IntervalTree<DateTime, int>();
+            var emptyTree = new RangeTree<DateTime, int>();
             Assert.Pass();
         }
 
         [Test]
         public void CreateEmptyIntervalTree()
         {
-            var emptyTree = new IntervalTree<DateTime, int>();
+            var emptyTree = new RangeTree<DateTime, int>();
             Assert.That(emptyTree, Is.Not.Null);
         }
 
         [Test]
         public void GetIntervalByExactEndTime()
         {
-            var tree = new IntervalTree<DateTime, int>();
+            var tree = new RangeTree<DateTime, int>();
             tree.Add(ZERO, ZERO.AddHours(1), 100);
 
             var result = tree.Query(ZERO.AddHours(1)).ToList();
@@ -37,7 +37,7 @@ namespace IntervalTreeTests
         [Test]
         public void GetIntervalByExactStartTime()
         {
-            var tree = new IntervalTree<DateTime, int>();
+            var tree = new RangeTree<DateTime, int>();
             tree.Add(ZERO, ZERO.AddHours(1), 100);
 
             var result = tree.Query(ZERO).ToList();
@@ -53,7 +53,7 @@ namespace IntervalTreeTests
         [Test]
         public void OverlapOnExactEndAndStart_AssertCount()
         {
-            var tree = new IntervalTree<DateTime, int>();
+            var tree = new RangeTree<DateTime, int>();
             tree.Add(ZERO, ZERO.AddHours(10), 100);
             tree.Add(ZERO.AddHours(10), ZERO.AddHours(15), 200);
             tree.Add(ZERO.AddHours(10), ZERO.AddHours(20), 200);
@@ -65,7 +65,7 @@ namespace IntervalTreeTests
         [Test]
         public void TestSeparateIntervals()
         {
-            var tree = new IntervalTree<DateTime, int>();
+            var tree = new RangeTree<DateTime, int>();
             tree.Add(ZERO, ZERO.AddHours(10), 100);
             tree.Add(ZERO.AddHours(20), ZERO.AddHours(30), 200);
 
@@ -77,7 +77,7 @@ namespace IntervalTreeTests
         [Test]
         public void TwoIntersectingIntervals()
         {
-            var tree = new IntervalTree<DateTime, int>();
+            var tree = new RangeTree<DateTime, int>();
             tree.Add(ZERO, ZERO.AddHours(10), 100);
             tree.Add(ZERO.AddHours(3), ZERO.AddHours(30), 200);
 

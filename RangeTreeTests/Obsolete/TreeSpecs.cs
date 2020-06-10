@@ -1,12 +1,12 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NUnit.Framework;
-using IntervalTree;
+using RangeTree;
 
-namespace IntervalTreeTests
+namespace RangeTreeTests
 {
     [TestFixture]
     public class If_the_user_searches_for_overlapping_entries_in_an_interval_tree : Spec
@@ -75,9 +75,9 @@ namespace IntervalTreeTests
                 .Count();
         }
 
-        private static IIntervalTree<int, string> CreateTree(IEnumerable<Tuple<int, int>> entries)
+        private static IRangeTree<int, string> CreateTree(IEnumerable<Tuple<int, int>> entries)
         {
-            var tree = new IntervalTree<int, string>();
+            var tree = new RangeTree<int, string>();
 
             foreach (var interval in entries)
             {

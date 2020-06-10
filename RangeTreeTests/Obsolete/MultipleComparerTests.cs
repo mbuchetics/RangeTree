@@ -1,9 +1,9 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Linq;
-using NUnit.Framework;
-using IntervalTree;
+using RangeTree;
 
-namespace IntervalTreeTests
+namespace RangeTreeTests
 {
     [TestFixture]
     public class MultipleComparerTests
@@ -11,7 +11,7 @@ namespace IntervalTreeTests
         [Test]
         public void CreateTwoTrees_ProvideDifferentComparers_ExpectBothToHaveTheComparersFromConstruction()
         {
-            var tree = new IntervalTree<string, string>(StringComparer.Ordinal)
+            var tree = new RangeTree<string, string>(StringComparer.Ordinal)
             {
                 { "a", "e", "value1" },
                 { "B", "D", "value2" },
@@ -20,7 +20,7 @@ namespace IntervalTreeTests
             Assert.That(results.Length, Is.EqualTo(1));
             Assert.That(results[0], Is.EqualTo("value1"));
 
-            tree = new IntervalTree<string, string>(StringComparer.OrdinalIgnoreCase)
+            tree = new RangeTree<string, string>(StringComparer.OrdinalIgnoreCase)
             {
                 { "a", "e", "value1" },
                 { "B", "D", "value2" },

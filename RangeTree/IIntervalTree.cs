@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace RangeTree
+namespace IntervalTree
 {
     /// <summary>
-    /// The standard range tree implementation. Keeps a root node and forwards all queries to it.
+    /// The standard interval tree implementation. Keeps a root node and forwards all queries to it.
     /// Whenever new items are added or items are removed, the tree goes temporarily "out of sync", which means that the
     /// internal index is not updated immediately, but upon the next query operation.    
     /// </summary>
     /// <typeparam name="TKey">The type of the range.</typeparam>
     /// <typeparam name="TValue">The type of the data items.</typeparam>
-    public interface IRangeTree<TKey, TValue> : IEnumerable<RangeValuePair<TKey, TValue>>
+    public interface IIntervalTree<TKey, TValue> : IEnumerable<RangeValuePair<TKey, TValue>>
     {
         /// <summary>
         /// Returns all items contained in the tree.
@@ -30,12 +30,12 @@ namespace RangeTree
         /// Performs a range query. All items with overlapping ranges are returned.
         /// </summary>
         IEnumerable<TValue> Query(TKey from, TKey to);
-        
+
         /// <summary>
         /// Adds the specified item.
         /// </summary>
         void Add(TKey from, TKey to, TValue value);
-        
+
         /// <summary>
         /// Removes the specified item.
         /// </summary>
