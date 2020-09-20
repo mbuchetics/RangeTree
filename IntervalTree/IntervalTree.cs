@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RangeTree
+namespace IntervalTree
 {
-    public class RangeTree<TKey, TValue> : IRangeTree<TKey, TValue>
+    public class IntervalTree<TKey, TValue> : IIntervalTree<TKey, TValue>
     {
-        private RangeTreeNode<TKey, TValue> root;
+        private IntervalTreeNode<TKey, TValue> root;
         private List<RangeValuePair<TKey, TValue>> items;
         private readonly IComparer<TKey> comparer;
         private bool isInSync;
@@ -43,16 +43,16 @@ namespace RangeTree
         /// <summary>
         /// Initializes an empty tree.
         /// </summary>
-        public RangeTree() : this(Comparer<TKey>.Default) { }
+        public IntervalTree() : this(Comparer<TKey>.Default) { }
 
         /// <summary>
         /// Initializes an empty tree.
         /// </summary>
-        public RangeTree(IComparer<TKey> comparer)
+        public IntervalTree(IComparer<TKey> comparer)
         {
             this.comparer = comparer ?? Comparer<TKey>.Default;
             isInSync = true;
-            root = new RangeTreeNode<TKey, TValue>(this.comparer);
+            root = new IntervalTreeNode<TKey, TValue>(this.comparer);
             items = new List<RangeValuePair<TKey, TValue>>();
         }
 
@@ -95,7 +95,7 @@ namespace RangeTree
 
         public void Clear()
         {
-            root = new RangeTreeNode<TKey, TValue>(comparer);
+            root = new IntervalTreeNode<TKey, TValue>(comparer);
             items = new List<RangeValuePair<TKey, TValue>>();
             isInSync = true;
         }
@@ -114,9 +114,9 @@ namespace RangeTree
                 return;
 
             if (items.Count > 0)
-                root = new RangeTreeNode<TKey, TValue>(items, comparer);
+                root = new IntervalTreeNode<TKey, TValue>(items, comparer);
             else
-                root = new RangeTreeNode<TKey, TValue>(comparer);
+                root = new IntervalTreeNode<TKey, TValue>(comparer);
             isInSync = true;
         }
     }

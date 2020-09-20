@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Diagnostics;
-using RangeTree;
+using System.Linq;
+using IntervalTree;
 
-namespace RangeTreeExamples
+namespace IntervalTreeExamples
 {
     class Program
     {
@@ -20,7 +20,7 @@ namespace RangeTreeExamples
         {
             Console.WriteLine("Example 1");
 
-            var tree = new RangeTree<int, string>()
+            var tree = new IntervalTree<int, string>()
             {
                 { 0, 10, "1" },
                 { 20, 30, "2" },
@@ -40,7 +40,7 @@ namespace RangeTreeExamples
         {
             Console.WriteLine("Example 2");
 
-            var tree = new RangeTree<int, string>();
+            var tree = new IntervalTree<int, string>();
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -59,12 +59,12 @@ namespace RangeTreeExamples
             Console.WriteLine("elapsed time: {0}", stopwatch.Elapsed);
         }
 
-        static Random s_rnd = new Random();
+        static Random random = new Random();
 
-        static void RandomTreeInsert(IRangeTree<int, string> tree, int limit)
+        static void RandomTreeInsert(IIntervalTree<int, string> tree, int limit)
         {
-            var a = s_rnd.Next(limit);
-            var b = s_rnd.Next(limit);
+            var a = random.Next(limit);
+            var b = random.Next(limit);
 
             tree.Add(Math.Min(a, b), Math.Max(a, b), "value");
         }

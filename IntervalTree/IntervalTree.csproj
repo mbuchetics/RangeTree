@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.2;netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard1.2;netstandard2.0;netstandard2.1;net45</TargetFrameworks>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -10,21 +10,20 @@
 In computer science, an interval tree is an ordered tree data structure to hold intervals. Specifically, it allows one to efficiently find all intervals that overlap with any given interval or point. It is often used for windowing queries, for instance, to find all roads on a computerized map inside a rectangular viewport, or to find all visible elements inside a three-dimensional scene.</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Copyright>Copyright (c) 2019, Matthias Buchetics and Alexander Pacha</Copyright>
+    <Copyright>Copyright (c) 2020, Matthias Buchetics and Alexander Pacha</Copyright>
     <PackageLicenseUrl>https://github.com/mbuchetics/RangeTree/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/mbuchetics/RangeTree</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mbuchetics/RangeTree.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>range, tree, interval</PackageTags>
-    <Version>2.0.1</Version>
+    <Version>2.1.0</Version>
     <PackageId>RangeTree</PackageId>
     <Authors>Matthias Buchetics, Alexander Pacha and others, see CONTRIBUTORS.md</Authors>
-    <Product>RangeTree  - A generic interval tree implementation in C#</Product>
-    <PackageReleaseNotes>Major overhaul by Erik Domke to a nice and cleaner interface.
-Support for async version has been dropped and Rebuild / AutoRebuild functionality is now only internal (there was no reason for making it accessible from the outside anyway).
+    <Product>IntervalTree  - A generic interval tree implementation in C#</Product>
+    <PackageReleaseNotes>Renamed from RangeTree to IntervalTree, because this is what it actually is.
 For a full list changes at https://github.com/mbuchetics/RangeTree/releases</PackageReleaseNotes>
-    <AssemblyVersion>2.0.1</AssemblyVersion>
-    <FileVersion>2.0.1</FileVersion>
+    <AssemblyVersion>2.1.0</AssemblyVersion>
+    <FileVersion>2.1.0</FileVersion>
     <Company>Matthias Buchetics, Alexander Pacha</Company>
   </PropertyGroup>
   
