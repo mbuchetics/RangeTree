@@ -173,8 +173,8 @@ namespace IntervalTree
             return fromComp;
         }
 
-        public TKey Max { get; private set; } = default(TKey);
+        public TKey Max { get; }
 
-        public TKey Min { get; private set; } = default(TKey);
+        public TKey Min { get; }
     }
 }
