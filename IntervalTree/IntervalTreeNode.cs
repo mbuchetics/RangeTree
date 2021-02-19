@@ -48,11 +48,13 @@ namespace IntervalTree
                 endPoints.Add(item.To);
             }
             endPoints.Sort(this.comparer);
-
+            
             // the median is used as center value
             if (endPoints.Count > 0)
             {
+                Min = endPoints[0];
                 center = endPoints[endPoints.Count / 2];
+                Max = endPoints[endPoints.Count - 1];
             }
 
             var inner = new List<RangeValuePair<TKey, TValue>>();
@@ -171,30 +173,8 @@ namespace IntervalTree
             return fromComp;
         }
 
-        public TKey Max
-        {
-            get
-            {
-                if (rightNode != null)
-                    return rightNode.Max;
-                else if (items != null)
-                    return items.Max(i => i.To);
-                else
-                    return default(TKey);
-            }
-        }
+        public TKey Max { get; private set; } = default(TKey);
 
-        public TKey Min
-        {
-            get
-            {
-                if (leftNode != null)
-                    return leftNode.Min;
-                else if (items != null)
-                    return items.Min(i => i.From);
-                else
-                    return default(TKey);
-            }
-        }
+        public TKey Min { get; private set; } = default(TKey);
     }
 }

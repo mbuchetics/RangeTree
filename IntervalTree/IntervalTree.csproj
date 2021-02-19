@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.2;netstandard2.0;net45</TargetFrameworks>
+    <PackageVersion>3.0.1</PackageVersion>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -23,8 +24,8 @@ In computer science, an interval tree is an ordered tree data structure to hold 
     <PackageReleaseNotes>BREAKING CHANGES: Removing RangeTree code after is has been renamed to IntervalTree in version 2.1.0.
 Make sure that you upgrade to version 2.1.0 first and that you have no more errors before upgrading to this version. This version contains no new features, but fixes the misleading name "RangeTree" when in fact it is an Interval tree.
 For a full list changes at https://github.com/mbuchetics/RangeTree/releases</PackageReleaseNotes>
-    <AssemblyVersion>3.0.0</AssemblyVersion>
-    <FileVersion>3.0.0</FileVersion>
+    <AssemblyVersion>3.0.1</AssemblyVersion>
+    <FileVersion>3.0.1</FileVersion>
     <Company>Matthias Buchetics, Alexander Pacha</Company>
   </PropertyGroup>
   
