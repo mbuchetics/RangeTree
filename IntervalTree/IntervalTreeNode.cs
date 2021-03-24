@@ -96,9 +96,9 @@ namespace IntervalTree
         /// Performs a point query with a single value.
         /// All items with overlapping ranges are returned.
         /// </summary>
-        public IEnumerable<TValue> Query(TKey value)
+        public IEnumerable<RangeValuePair<TKey, TValue>> Query(TKey value)
         {
-            var results = new List<TValue>();
+            var results = new List<RangeValuePair<TKey, TValue>>();
 
             // If the node has items, check for leaves containing the value.
             if (items != null)
@@ -109,7 +109,7 @@ namespace IntervalTree
                         break;
                     else if (comparer.Compare(value, o.From) >= 0 && comparer.Compare(value, o.To) <= 0)
                     {
-                        results.Add(o.Value);
+                        results.Add(o);
                     }
                 }
             }
@@ -129,9 +129,9 @@ namespace IntervalTree
         /// Performs a range query.
         /// All items with overlapping ranges are returned.
         /// </summary>
-        public IEnumerable<TValue> Query(TKey from, TKey to)
+        public IEnumerable<RangeValuePair<TKey,TValue>> Query(TKey from, TKey to)
         {
-            var results = new List<TValue>();
+            var results = new List<RangeValuePair<TKey, TValue>>();
 
             // If the node has items, check for leaves intersecting the range.
             if (items != null)
@@ -141,7 +141,7 @@ namespace IntervalTree
                     if (comparer.Compare(o.From, to) > 0)
                         break;
                     else if (comparer.Compare(to, o.From) >= 0 && comparer.Compare(from, o.To) <= 0)
-                        results.Add(o.Value);
+                        results.Add(o);
                 }
             }
 

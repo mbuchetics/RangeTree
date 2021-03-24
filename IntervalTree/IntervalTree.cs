@@ -56,7 +56,7 @@ namespace IntervalTree
             items = new List<RangeValuePair<TKey, TValue>>();
         }
 
-        public IEnumerable<TValue> Query(TKey value)
+        public IEnumerable<RangeValuePair<TKey, TValue>> Query(TKey value)
         {
             if (!isInSync)
                 Rebuild();
@@ -64,7 +64,7 @@ namespace IntervalTree
             return root.Query(value);
         }
 
-        public IEnumerable<TValue> Query(TKey from, TKey to)
+        public IEnumerable<RangeValuePair<TKey, TValue>> Query(TKey from, TKey to)
         {
             if (!isInSync)
                 Rebuild();
@@ -86,11 +86,21 @@ namespace IntervalTree
             isInSync = false;
             items = items.Where(l => !l.Value.Equals(value)).ToList();
         }
+        public void Remove(RangeValuePair<TKey, TValue> value)
+        {
+            isInSync = false;
+            items = items.Where(l => !l.Equals(value)).ToList();
+        }
 
         public void Remove(IEnumerable<TValue> items)
         {
             isInSync = false;
             this.items = this.items.Where(l => !items.Contains(l.Value)).ToList();
+        }
+        public void Remove(IEnumerable<RangeValuePair<TKey, TValue>> items)
+        {
+            isInSync = false;
+            this.items = this.items.Where(l => !items.Contains(l)).ToList();
         }
 
         public void Clear()

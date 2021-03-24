@@ -28,10 +28,10 @@ namespace IntervalTreeExamples
                 { 25, 35, "4" },
             };
 
-            PrintQueryResult("query 1", tree.Query(5));
-            PrintQueryResult("query 2", tree.Query(10));
-            PrintQueryResult("query 3", tree.Query(29));
-            PrintQueryResult("query 4", tree.Query(5, 15));
+            PrintQueryResult("query 1", tree.Query(5).Select(x => x.Value));
+            PrintQueryResult("query 2", tree.Query(10).Select(x => x.Value));
+            PrintQueryResult("query 3", tree.Query(29).Select(x => x.Value));
+            PrintQueryResult("query 4", tree.Query(5, 15).Select(x => x.Value));
 
             Console.WriteLine();
         }

@@ -18,7 +18,7 @@ namespace IntervalTreeTests
             };
             var results = tree.Query("c").ToArray();
             Assert.That(results.Length, Is.EqualTo(1));
-            Assert.That(results[0], Is.EqualTo("value1"));
+            Assert.That(results[0].Value, Is.EqualTo("value1"));
 
             tree = new IntervalTree<string, string>(StringComparer.OrdinalIgnoreCase)
             {
@@ -27,8 +27,8 @@ namespace IntervalTreeTests
             };
             results = tree.Query("c").ToArray();
             Assert.That(results.Length, Is.EqualTo(2));
-            Assert.That(results[0], Is.EqualTo("value1"));
-            Assert.That(results[1], Is.EqualTo("value2"));
+            Assert.That(results[0].Value, Is.EqualTo("value1"));
+            Assert.That(results[1].Value, Is.EqualTo("value2"));
         }
     }
 }

@@ -71,7 +71,7 @@ namespace IntervalTreeTests
 
             var result = tree.Query(ZERO.AddHours(5)).ToList();
             Assert.That(result.Count, Is.EqualTo(1));
-            Assert.That(result[0], Is.EqualTo(100));
+            Assert.That(result[0].Value, Is.EqualTo(100));
         }
 
         [Test]
@@ -83,8 +83,8 @@ namespace IntervalTreeTests
 
             var result = tree.Query(ZERO.AddHours(5)).ToList();
             Assert.That(result.Count, Is.EqualTo(2));
-            Assert.That(result[0], Is.EqualTo(100));
-            Assert.That(result[1], Is.EqualTo(200));
+            Assert.That(result[0].Value, Is.EqualTo(100));
+            Assert.That(result[1].Value, Is.EqualTo(200));
         }
     }
 }

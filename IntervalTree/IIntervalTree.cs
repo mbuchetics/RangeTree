@@ -24,12 +24,12 @@ namespace IntervalTree
         /// <summary>
         /// Performs a point query with a single value. All items with overlapping ranges are returned.
         /// </summary>
-        IEnumerable<TValue> Query(TKey value);
+        IEnumerable<RangeValuePair<TKey, TValue>> Query(TKey value);
 
         /// <summary>
         /// Performs a range query. All items with overlapping ranges are returned.
         /// </summary>
-        IEnumerable<TValue> Query(TKey from, TKey to);
+        IEnumerable<RangeValuePair<TKey, TValue>> Query(TKey from, TKey to);
 
         /// <summary>
         /// Adds the specified item.
@@ -39,12 +39,22 @@ namespace IntervalTree
         /// <summary>
         /// Removes the specified item.
         /// </summary>
-        void Remove(TValue item);
+        void Remove(TValue item);        
+        
+        /// <summary>
+        /// Removes the specified item.
+        /// </summary>
+        void Remove(RangeValuePair<TKey, TValue> item);
 
         /// <summary>
         /// Removes the specified items.
         /// </summary>
         void Remove(IEnumerable<TValue> items);
+        
+        /// <summary>
+        /// Removes the specified items.
+        /// </summary>
+        void Remove(IEnumerable<RangeValuePair<TKey, TValue>> items);
 
         /// <summary>
         /// Removes all elements from the range tree.
