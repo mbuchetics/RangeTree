@@ -1,6 +1,6 @@
 # IntervalTree #
 
-[![Build status](https://ci.appveyor.com/api/projects/status/dlxg91hh1qrrfsex?svg=true)](https://ci.appveyor.com/project/apacha/rangetree)
+[![Build status](https://ci.appveyor.com/api/projects/status/t8xvh5oquuvk17ks?svg=true)](https://ci.appveyor.com/project/apacha/rangetree)
 [![NuGet version](https://img.shields.io/nuget/v/RangeTree.svg?style=flat-square)](https://www.nuget.org/packages/RangeTree)
 
 ## A generic interval tree ##
