@@ -57,8 +57,12 @@ var results3 = tree.Query(29);    // 2 items: [20 - 30], [25 - 35]
 var results4 = tree.Query(5, 15); // 2 items: [0 - 10], [15 - 17]
 ```
     
-The solution file contains a more examples and tests, that show how to use IntervalTree with other data types.
+The solution file contains more examples and tests, that show how to use IntervalTree with other data types.
     
 ## Implementation Details ##
 
 In this implementation, whenever you add or remove items from the tree, the tree goes "out of sync" internally, which means that the items are stored, but the tree-index is not updated yet. Upon the next query, the tree structure is automatically rebuild. Subsequent queries will use the cached index and be much faster. The creation of the tree-index requires `O(n log n)` time. Therefore, it is best suited for trees that do not change often or small trees, where the creation time is negligible.
+
+## RangeTree vs. IntervalTree ##
+
+This project contains an IntervalTree (see #24), but was incorrectly named RangeTree at the beginning. It was mostly renamed to IntervalTree in version 3.0.0. However, given that a large number of users are using this project, renaming the NuGet package and repository was not possible without breaking too much, so we settled with (just) renaming all occurences in the source code and documentation.
