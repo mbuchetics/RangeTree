@@ -1,38 +1,37 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace IntervalTree
 {
     /// <summary>
-    /// A node of the range tree. Given a list of items, it builds
-    /// its subtree. Also contains methods to query the subtree.
-    /// Basically, all interval tree logic is here.
+    ///     A node of the range tree. Given a list of items, it builds
+    ///     its subtree. Also contains methods to query the subtree.
+    ///     Basically, all interval tree logic is here.
     /// </summary>
     internal class IntervalTreeNode<TKey, TValue> : IComparer<RangeValuePair<TKey, TValue>>
     {
         private readonly TKey center;
-        private readonly IntervalTreeNode<TKey, TValue> leftNode;
-        private readonly IntervalTreeNode<TKey, TValue> rightNode;
-        private readonly RangeValuePair<TKey, TValue>[] items;
 
         private readonly IComparer<TKey> comparer;
+        private readonly RangeValuePair<TKey, TValue>[] items;
+        private readonly IntervalTreeNode<TKey, TValue> leftNode;
+        private readonly IntervalTreeNode<TKey, TValue> rightNode;
 
         /// <summary>
-        /// Initializes an empty node.
+        ///     Initializes an empty node.
         /// </summary>
         /// <param name="comparer">The comparer used to compare two items.</param>
         public IntervalTreeNode(IComparer<TKey> comparer)
         {
             this.comparer = comparer ?? Comparer<TKey>.Default;
 
-            center = default(TKey);
+            center = default;
             leftNode = null;
             rightNode = null;
             items = null;
         }
 
         /// <summary>
-        /// Initializes a node with a list of items, builds the sub tree.
+        ///     Initializes a node with a list of items, builds the sub tree.
         /// </summary>
         /// <param name="items">The items that should be added to this node</param>
         /// <param name="comparer">The comparer used to compare two items.</param>
@@ -47,8 +46,9 @@ namespace IntervalTree
                 endPoints.Add(item.From);
                 endPoints.Add(item.To);
             }
+
             endPoints.Sort(this.comparer);
-            
+
             // the median is used as center value
             if (endPoints.Count > 0)
             {
@@ -66,14 +66,12 @@ namespace IntervalTree
             // if it is on the right of the center, add it to the right items
             // otherwise (range overlaps the center), add the item to this node's items
             foreach (var o in items)
-            {
                 if (this.comparer.Compare(o.To, center) < 0)
                     left.Add(o);
                 else if (this.comparer.Compare(o.From, center) > 0)
                     right.Add(o);
                 else
                     inner.Add(o);
-            }
 
             // sort the items, this way the query is faster later on
             if (inner.Count > 0)
@@ -94,9 +92,30 @@ namespace IntervalTree
                 rightNode = new IntervalTreeNode<TKey, TValue>(right, this.comparer);
         }
 
+        public TKey Max { get; }
+
+        public TKey Min { get; }
+
         /// <summary>
-        /// Performs a point query with a single value.
-        /// All items with overlapping ranges are returned.
+        ///     Returns less than 0 if this range's From is less than the other, greater than 0 if greater.
+        ///     If both are equal, the comparison of the To values is returned.
+        ///     0 if both ranges are equal.
+        /// </summary>
+        /// <param name="x">The first item.</param>
+        /// <param name="y">The other item.</param>
+        /// <returns></returns>
+        int IComparer<RangeValuePair<TKey, TValue>>.Compare(RangeValuePair<TKey, TValue> x,
+            RangeValuePair<TKey, TValue> y)
+        {
+            var fromComp = comparer.Compare(x.From, y.From);
+            if (fromComp == 0)
+                return comparer.Compare(x.To, y.To);
+            return fromComp;
+        }
+
+        /// <summary>
+        ///     Performs a point query with a single value.
+        ///     All items with overlapping ranges are returned.
         /// </summary>
         public IEnumerable<TValue> Query(TKey value)
         {
@@ -104,17 +123,11 @@ namespace IntervalTree
 
             // If the node has items, check for leaves containing the value.
             if (items != null)
-            {
                 foreach (var o in items)
-                {
                     if (comparer.Compare(o.From, value) > 0)
                         break;
                     else if (comparer.Compare(value, o.From) >= 0 && comparer.Compare(value, o.To) <= 0)
-                    {
                         results.Add(o.Value);
-                    }
-                }
-            }
 
             // go to the left or go to the right of the tree, depending
             // where the query value lies compared to the center
@@ -128,8 +141,8 @@ namespace IntervalTree
         }
 
         /// <summary>
-        /// Performs a range query.
-        /// All items with overlapping ranges are returned.
+        ///     Performs a range query.
+        ///     All items with overlapping ranges are returned.
         /// </summary>
         public IEnumerable<TValue> Query(TKey from, TKey to)
         {
@@ -137,15 +150,11 @@ namespace IntervalTree
 
             // If the node has items, check for leaves intersecting the range.
             if (items != null)
-            {
                 foreach (var o in items)
-                {
                     if (comparer.Compare(o.From, to) > 0)
                         break;
                     else if (comparer.Compare(to, o.From) >= 0 && comparer.Compare(from, o.To) <= 0)
                         results.Add(o.Value);
-                }
-            }
 
             // go to the left or go to the right of the tree, depending
             // where the query value lies compared to the center
@@ -156,25 +165,5 @@ namespace IntervalTree
 
             return results;
         }
-
-        /// <summary>
-        /// Returns less than 0 if this range's From is less than the other, greater than 0 if greater.
-        /// If both are equal, the comparison of the To values is returned.
-        /// 0 if both ranges are equal.
-        /// </summary>
-        /// <param name="x">The first item.</param>
-        /// <param name="y">The other item.</param>
-        /// <returns></returns>
-        int IComparer<RangeValuePair<TKey, TValue>>.Compare(RangeValuePair<TKey, TValue> x, RangeValuePair<TKey, TValue> y)
-        {
-            var fromComp = comparer.Compare(x.From, y.From);
-            if (fromComp == 0)
-                return comparer.Compare(x.To, y.To);
-            return fromComp;
-        }
-
-        public TKey Max { get; }
-
-        public TKey Min { get; }
     }
 }
