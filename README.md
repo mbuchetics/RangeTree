@@ -65,4 +65,4 @@ In this implementation, whenever you add or remove items from the tree, the tree
 
 ## RangeTree vs. IntervalTree ##
 
-This project contains an IntervalTree (see #24), but was incorrectly named RangeTree at the beginning. It was mostly renamed to IntervalTree in version 3.0.0. However, given that a large number of users are using this project, renaming the NuGet package and repository was not possible without breaking too much, so we settled with (just) renaming all occurences in the source code and documentation.
+This project contains an IntervalTree (see [Issue #24](https://github.com/mbuchetics/RangeTree/issues/24)), but was incorrectly named RangeTree at the beginning. It was mostly renamed to IntervalTree in version 3.0.0. However, given that a large number of users are using this project, renaming the NuGet package and repository was not possible without breaking too much, so we settled with (just) renaming all occurences in the source code and documentation.
