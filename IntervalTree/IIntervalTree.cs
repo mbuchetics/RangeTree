@@ -22,9 +22,19 @@ namespace IntervalTree
         int Count { get; }
 
         /// <summary>
+        /// Performs a point query with a single value. One item with an overlapping ranges is returned.
+        /// </summary>
+        TValue QueryOne(TKey value);
+
+        /// <summary>
         /// Performs a point query with a single value. All items with overlapping ranges are returned.
         /// </summary>
         IEnumerable<TValue> Query(TKey value);
+
+        /// <summary>
+        /// Performs a range query. One item with an overlapping range is returned.
+        /// </summary>
+        TValue QueryOne(TKey from, TKey to);
 
         /// <summary>
         /// Performs a range query. All items with overlapping ranges are returned.
