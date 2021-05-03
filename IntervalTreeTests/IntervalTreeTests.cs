@@ -64,5 +64,36 @@ namespace IntervalTreeTests
 
             Assert.That(max, Is.EqualTo(6));
         }
+
+        [Test]
+        public void GettingMin_Mixed()
+        {
+            var tree = new IntervalTree<int, int>
+            {
+                { 2, 3, -1 },
+                { 8, 9, -1 },
+                { 1, 10, -1 },
+            };
+
+            var min = tree.Min;
+
+            Assert.That(min, Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void GettingMax_Mixed()
+        {
+            var tree = new IntervalTree<int, int>
+            {
+                { 1, 10, -1 },
+                { 2, 3, -1 },
+                { 4, 5, -1 },
+                { 8, 9, -1 },
+            };
+
+            var max = tree.Max;
+
+            Assert.That(max, Is.EqualTo(10));
+        }
     }
 }
