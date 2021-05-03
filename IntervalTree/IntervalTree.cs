@@ -56,12 +56,28 @@ namespace IntervalTree
             items = new List<RangeValuePair<TKey, TValue>>();
         }
 
+        public TValue QueryOne(TKey value)
+        {
+            if (!isInSync)
+                Rebuild();
+
+            return root.QueryOne(value);
+        }
+
         public IEnumerable<TValue> Query(TKey value)
         {
             if (!isInSync)
                 Rebuild();
 
             return root.Query(value);
+        }
+
+        public TValue QueryOne(TKey from, TKey to)
+        {
+            if (!isInSync)
+                Rebuild();
+
+            return root.QueryOne(from, to);
         }
 
         public IEnumerable<TValue> Query(TKey from, TKey to)
